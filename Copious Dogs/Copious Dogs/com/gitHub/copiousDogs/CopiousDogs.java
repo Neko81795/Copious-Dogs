@@ -1,6 +1,8 @@
 package com.gitHub.copiousDogs;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import com.gitHub.copiousDogs.items.DogBiscuit;
 
@@ -18,9 +20,19 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class CopiousDogs
 {
 	//
+	//Creative Tabs
+	//
+	public static CreativeTabs tabCopiousDogs = new CreativeTabs("tabCopiousDogs")
+	{
+        public ItemStack getIconItemStack()
+        {
+                return new ItemStack(dogBiscuit, 1, 0);
+        }
+	};
+	//
 	//Items
 	//
-	private static Item dogBiscuit = new DogBiscuit(500);
+	private static Item dogBiscuit;
 	
 	//
 	//Mobs
@@ -45,9 +57,15 @@ public class CopiousDogs
     public void load(FMLInitializationEvent event) 
     {
     	//
+    	//tab Copious dogs
+    	//
+    	LanguageRegistry.instance().addStringLocalization("itemGroup.tabCopiousDogs", "en_US", "Copious Dogs");
+    	//
     	// Dog Biscuit
     	//
+    	dogBiscuit = new DogBiscuit(500);
     	LanguageRegistry.addName(dogBiscuit, "Dog Biscuit");
+    	
     }
    
     @EventHandler

@@ -1,7 +1,8 @@
 package com.gitHub.copiousDogs.items;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+
+import com.gitHub.copiousDogs.CopiousDogs;
 
 public class DogBiscuit extends Item
 {
@@ -9,7 +10,7 @@ public class DogBiscuit extends Item
 	{
 		super(id);
 		setUnlocalizedName("DogBiscuit");
-		setCreativeTab(CreativeTabs.tabMisc);
+		setCreativeTab(CopiousDogs.tabCopiousDogs);
 		setMaxStackSize(64);
 	}
 }

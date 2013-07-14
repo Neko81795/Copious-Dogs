@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="Copious Dogs"/>
-	<classpathentry kind="var" path="Mineforge/jars/versions/1.6.2/1.6.2.jar"/>
 	<classpathentry kind="var" path="Mineforge/jars/libraries/argo/argo/2.25_fixed/argo-2.25_fixed.jar"/>
 	<classpathentry kind="var" path="Mineforge/jars/libraries/org/ow2/asm/asm-debug-all/4.1/asm-debug-all-4.1.jar"/>
 	<classpathentry kind="var" path="Mineforge/jars/libraries/org/bouncycastle/bcprov-jdk15on/1.47/bcprov-jdk15on-1.47.jar"/>
@@ -22,11 +21,6 @@
 	<classpathentry kind="var" path="Mineforge/jars/libraries/org/lwjgl/lwjgl/lwjgl_util/2.9.0/lwjgl_util-2.9.0.jar"/>
 	<classpathentry kind="var" path="Mineforge/jars/libraries/com/paulscode/soundsystem/20120107/soundsystem-20120107.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="var" path="Mineforge/jars/forge/minecraftforge-universal-1.6.2-9.10.0.790.jar" sourcepath="/Mineforge/jars/forge/minecraftforge-src-1.6.2-9.10.0.790.zip">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/Neko/AppData/Roaming/Eclipse/Mineforge/Forge-1.6.2-9.10.0.790/minecraftforge-src-1.6.2-9.10.0.790/forge/mcp/jars/forge/minecraftforge-javadoc-1.5.2-7.8.1.738.zip!/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="var" path="Mineforge/jars/MCP/MCP.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Minecraft"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
