@@ -13,6 +13,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "CopiousDogs", name = "Copious Dogs", version = "0.0.0.0")
@@ -65,7 +66,7 @@ public class CopiousDogs
     	//
     	dogBiscuit = new DogBiscuit(500);
     	LanguageRegistry.addName(dogBiscuit, "Dog Biscuit");
-    	
+    	GameRegistry.addRecipe(new ItemStack(dogBiscuit), " m ", "mbm", " m ", 'm', Item.porkRaw, 'b', Item.bone);
     }
    
     @EventHandler
