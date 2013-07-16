@@ -1,7 +1,10 @@
 package com.gitHub.copiousDogs;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityEggInfo;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -9,6 +12,7 @@ import net.minecraftforge.common.Configuration;
 
 import com.gitHub.copiousDogs.items.DogBiscuit;
 import com.gitHub.copiousDogs.mobs.Dog;
+import com.gitHub.copiousDogs.mobs.GoldenRetriever;
 import com.gitHub.copiousDogs.items.DogDish;
 
 import cpw.mods.fml.common.Mod;
@@ -43,7 +47,6 @@ public class CopiousDogs
 	public static Item dogBiscuit;
 	public static Item dogDish;
 	
-	
 	@Instance("CopiousDogs")
 	public static CopiousDogs instance;
 	
@@ -67,13 +70,16 @@ public class CopiousDogs
     	//
     	Reference.DOG_BISCUIT_ID = config.getItem("Dog biscuit:", 17001).getInt();
     	Reference.DOG_DISH_ID = config.getItem("Dog dish:", 17002).getInt();
+    	Reference.EGG_GOLDEN_RETRIEVER_ID = config.getItem("Egg Golden Retriever:", 17003).getInt();
     	
     	config.save();
     }
    
-    @EventHandler
+    @SuppressWarnings("unchecked")
+	@EventHandler
     public void load(FMLInitializationEvent event) 
     {
+    	proxy.registerRenderers();
     	//
     	//tab Copious dogs
     	//
@@ -87,10 +93,12 @@ public class CopiousDogs
     	//
     	//Golden Retriever
     	//
-    	EntityRegistry.registerModEntity(Dog.class, "Golden Retriever", 1, this, 40, 1, true);
-    	EntityRegistry.addSpawn(Dog.class, 10, 2, 6, EnumCreatureType.creature, BiomeGenBase.plains, 
-    			BiomeGenBase.forest, BiomeGenBase.forestHills);
-    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.GoldenRetriever.name", "Golden Retirever");
+    	EntityRegistry.registerModEntity(GoldenRetriever.class, "Golden Retriever", Reference.MOB_GOLDEN_RETRIEVER_ID, this, 40, 1, true);
+    	EntityRegistry.addSpawn(GoldenRetriever.class, 10, 2, 6, EnumCreatureType.creature, BiomeGenBase.plains);
+    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.Golden Retriever.name", "Golden Retriever");
+    	EntityList.IDtoClassMapping.put(Reference.EGG_GOLDEN_RETRIEVER_ID, GoldenRetriever.class);
+    	EntityList.entityEggs.put(Reference.EGG_GOLDEN_RETRIEVER_ID,
+    			new EntityEggInfo(Reference.EGG_GOLDEN_RETRIEVER_ID, 0xFFFFFF , 0x000000));
     	//
     	// Dog Dish
     	//
