@@ -1,7 +1,5 @@
 package com.gitHub.copiousDogs.items;
 
-import net.minecraft.item.Item;
-
 public class DogDish extends ItemCopiousDogs {
 
 	public DogDish(int id) {

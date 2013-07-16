@@ -1,9 +1,5 @@
 package com.gitHub.copiousDogs.items;
 
-import net.minecraft.item.Item;
-
-import com.gitHub.copiousDogs.CopiousDogs;
-
 public class DogBiscuit extends ItemCopiousDogs
 {
 	public DogBiscuit(int id)
