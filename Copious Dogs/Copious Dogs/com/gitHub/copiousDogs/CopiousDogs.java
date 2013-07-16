@@ -1,19 +1,20 @@
 package com.gitHub.copiousDogs;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.biome.BiomeCache;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.Configuration;
 
 import com.gitHub.copiousDogs.items.DogBiscuit;
 import com.gitHub.copiousDogs.mobs.Dog;
+import com.gitHub.copiousDogs.items.DogDish;
 
-import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -40,7 +41,7 @@ public class CopiousDogs
 	//Items
 	//
 	public static Item dogBiscuit;
-	public static Item spawnGoldenRetriever;
+	public static Item dogDish;
 	
 	
 	@Instance("CopiousDogs")
@@ -54,7 +55,20 @@ public class CopiousDogs
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) 
     {
-    	// Stub Method
+    	//
+    	//Loads the copiousdogs.cfg config file
+    	//
+    	Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+    	
+    	config.load();
+    	
+    	//
+    	//reads the config file for item ids
+    	//
+    	Reference.DOG_BISCUIT_ID = config.getItem("Dog biscuit:", 17001).getInt();
+    	Reference.DOG_DISH_ID = config.getItem("Dog dish:", 17002).getInt();
+    	
+    	config.save();
     }
    
     @EventHandler
@@ -67,11 +81,9 @@ public class CopiousDogs
     	//
     	//Dog Biscuit
     	//
-    	dogBiscuit = new DogBiscuit(500);
+    	dogBiscuit = new DogBiscuit(Reference.DOG_BISCUIT_ID);
     	LanguageRegistry.addName(dogBiscuit, "Dog Biscuit");
     	GameRegistry.addRecipe(new ItemStack(dogBiscuit), " m ", "mbm", " m ", 'm', Item.porkRaw, 'b', Item.bone);
-    	
-    	
     	//
     	//Golden Retriever
     	//
@@ -79,6 +91,12 @@ public class CopiousDogs
     	EntityRegistry.addSpawn(Dog.class, 10, 2, 6, EnumCreatureType.creature, BiomeGenBase.plains, 
     			BiomeGenBase.forest, BiomeGenBase.forestHills);
     	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.GoldenRetriever.name", "Golden Retirever");
+    	//
+    	// Dog Dish
+    	//
+    	dogDish = new DogDish(Reference.DOG_DISH_ID);
+    	LanguageRegistry.addName(dogDish, "Dog Dish");
+    	GameRegistry.addRecipe(new ItemStack(dogDish), "III", "IBI", "III", 'I', Item.ingotIron, 'B', Item.bucketEmpty);
     }
    
     @EventHandler
