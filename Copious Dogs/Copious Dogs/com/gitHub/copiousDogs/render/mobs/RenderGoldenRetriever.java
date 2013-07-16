@@ -1,4 +1,4 @@
-package com.gitHub.copiousDogs.mobs.renderers;
+package com.gitHub.copiousDogs.render.mobs;
 
 import com.gitHub.copiousDogs.mobs.GoldenRetriever;
 

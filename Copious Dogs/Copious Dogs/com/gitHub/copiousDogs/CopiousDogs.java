@@ -1,20 +1,18 @@
 package com.gitHub.copiousDogs;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 
 import com.gitHub.copiousDogs.items.DogBiscuit;
-import com.gitHub.copiousDogs.mobs.Dog;
 import com.gitHub.copiousDogs.mobs.GoldenRetriever;
-import com.gitHub.copiousDogs.items.DogDish;
-
+import com.gitHub.copiousDogs.blocks.BlockDogDish;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -45,7 +43,11 @@ public class CopiousDogs
 	//Items
 	//
 	public static Item dogBiscuit;
-	public static Item dogDish;
+	
+	//
+	//Blocks
+	//
+	public static Block dogDish;
 	
 	@Instance("CopiousDogs")
 	public static CopiousDogs instance;
@@ -54,23 +56,22 @@ public class CopiousDogs
 			serverSide = "com.gitHub.copiousDogs.CommonProxy")
 	public static CommonProxy proxy;
 	
+	public static int dogDishRendererID;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) 
     {
-    	//
     	//Loads the copiousdogs.cfg config file
-    	//
     	Configuration config = new Configuration(event.getSuggestedConfigurationFile());
     	
     	config.load();
     	
-    	//
     	//reads the config file for item ids
-    	//
     	Reference.DOG_BISCUIT_ID = config.getItem("Dog biscuit:", 17001).getInt();
-    	Reference.DOG_DISH_ID = config.getItem("Dog dish:", 17002).getInt();
     	Reference.EGG_GOLDEN_RETRIEVER_ID = config.getItem("Egg Golden Retriever:", 17003).getInt();
+    	
+    	//reads the config file for block ids
+    	Reference.DOG_DISH_ID = config.getBlock("Dog dish:", 1701).getInt();
     	
     	config.save();
     }
@@ -102,9 +103,12 @@ public class CopiousDogs
     	//
     	// Dog Dish
     	//
-    	dogDish = new DogDish(Reference.DOG_DISH_ID);
-    	LanguageRegistry.addName(dogDish, "Dog Dish");
+    	dogDish = new BlockDogDish(Reference.DOG_DISH_ID);
+    	GameRegistry.registerBlock(dogDish, "dogDish");
     	GameRegistry.addRecipe(new ItemStack(dogDish), "III", "IBI", "III", 'I', Item.ingotIron, 'B', Item.bucketEmpty);
+    	LanguageRegistry.addName(dogDish, "Dog Dish");
+    	
+    	proxy.registerRenderers();
     }
    
     @EventHandler
