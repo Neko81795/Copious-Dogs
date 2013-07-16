@@ -13,4 +13,9 @@ public class DogBiscuit extends Item
 		setCreativeTab(CopiousDogs.tabCopiousDogs);
 		setMaxStackSize(64);
 	}
+	
+	public float getHealAmount()
+	{
+		return 3;
+	}
 }
