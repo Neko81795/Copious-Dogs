@@ -10,9 +10,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 
-import com.gitHub.copiousDogs.items.DogBiscuit;
-import com.gitHub.copiousDogs.mobs.GoldenRetriever;
 import com.gitHub.copiousDogs.blocks.BlockDogDish;
+import com.gitHub.copiousDogs.blocks.tileentities.TileEntityDogDish;
+import com.gitHub.copiousDogs.items.DogBiscuit;
+import com.gitHub.copiousDogs.items.DogCollar;
+import com.gitHub.copiousDogs.mobs.GoldenRetriever;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -43,6 +46,7 @@ public class CopiousDogs
 	//Items
 	//
 	public static Item dogBiscuit;
+	public static Item dogCollar;
 	
 	//
 	//Blocks
@@ -68,7 +72,8 @@ public class CopiousDogs
     	
     	//reads the config file for item ids
     	Reference.DOG_BISCUIT_ID = config.getItem("Dog biscuit:", 17001).getInt();
-    	Reference.EGG_GOLDEN_RETRIEVER_ID = config.getItem("Egg Golden Retriever:", 17003).getInt();
+    	Reference.EGG_GOLDEN_RETRIEVER_ID = config.getItem("Egg Golden Retriever:", 17002).getInt();
+    	Reference.DOG_COLLAR_ID = config.getItem("Dog collar", 17003).getInt();
     	
     	//reads the config file for block ids
     	Reference.DOG_DISH_ID = config.getBlock("Dog dish:", 1701).getInt();
@@ -90,7 +95,11 @@ public class CopiousDogs
     	//
     	dogBiscuit = new DogBiscuit(Reference.DOG_BISCUIT_ID);
     	LanguageRegistry.addName(dogBiscuit, "Dog Biscuit");
-    	GameRegistry.addRecipe(new ItemStack(dogBiscuit), " m ", "mbm", " m ", 'm', Item.porkRaw, 'b', Item.bone);
+    	//
+    	//Dog Collar
+    	//
+    	dogCollar = new DogCollar(Reference.DOG_COLLAR_ID);
+    	LanguageRegistry.addName(dogCollar, "Dog Collar");
     	//
     	//Golden Retriever
     	//
@@ -105,12 +114,25 @@ public class CopiousDogs
     	//
     	dogDish = new BlockDogDish(Reference.DOG_DISH_ID);
     	GameRegistry.registerBlock(dogDish, "dogDish");
-    	GameRegistry.addRecipe(new ItemStack(dogDish), "III", "IBI", "III", 'I', Item.ingotIron, 'B', Item.bucketEmpty);
+    	GameRegistry.registerTileEntity(TileEntityDogDish.class, "dog_dish_entity");
     	LanguageRegistry.addName(dogDish, "Dog Dish");
     	
+    	registerRecipes();
     	proxy.registerRenderers();
     }
    
+    public void registerRecipes() {
+    	
+    	GameRegistry.addRecipe(new ItemStack(dogBiscuit), " m ", "mbm", " m ", 'm', Item.porkRaw, 'b', Item.bone);
+    	GameRegistry.addRecipe(new ItemStack(dogDish), "III", "IBI", "III", 'I', Item.ingotIron, 'B', Item.bucketEmpty);
+    	GameRegistry.addRecipe(new ItemStack(dogCollar), "SSS", "S S", "SSI", 'S', Item.silk, 'I', Item.ingotIron);
+    	
+    	for (int i = 0; i < 16; i++) {
+    		
+    		GameRegistry.addShapelessRecipe(new ItemStack(dogDish, 1, i), new ItemStack(Item.dyePowder, 1, i), dogDish);
+    	}
+    }
+    
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) 
     {
