@@ -111,7 +111,7 @@ public class CopiousDogs
     	//Golden Retriever
     	//
     	EntityRegistry.registerModEntity(GoldenRetriever.class, "Golden Retriever", Reference.MOB_GOLDEN_RETRIEVER_ID, this, 40, 1, true);
-    	EntityRegistry.addSpawn(GoldenRetriever.class, 10, 2, 6, EnumCreatureType.creature, BiomeGenBase.plains);
+    	EntityRegistry.addSpawn(GoldenRetriever.class, 2, 2, 6, EnumCreatureType.creature, BiomeGenBase.plains);
     	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.Golden Retriever.name", "Golden Retriever");
     	EntityList.IDtoClassMapping.put(Reference.EGG_GOLDEN_RETRIEVER_ID, GoldenRetriever.class);
     	EntityList.entityEggs.put(Reference.EGG_GOLDEN_RETRIEVER_ID,

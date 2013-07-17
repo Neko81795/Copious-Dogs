@@ -36,7 +36,6 @@ public class RenderGoldenRetriever extends RenderLiving
 	@Override
 	protected ResourceLocation func_110775_a(Entity entity)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return new ResourceLocation("copiousDogs:textures/mobs/goldenretrievertexture.png");
 	}
 }
