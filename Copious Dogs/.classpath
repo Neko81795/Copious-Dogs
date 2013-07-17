@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="Copious Dogs"/>
+	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="var" path="Mineforge/jars/libraries/argo/argo/2.25_fixed/argo-2.25_fixed.jar"/>
 	<classpathentry kind="var" path="Mineforge/jars/libraries/org/bouncycastle/bcprov-jdk15on/1.47/bcprov-jdk15on-1.47.jar"/>
 	<classpathentry kind="var" path="Mineforge/jars/libraries/com/paulscode/codecjorbis/20101023/codecjorbis-20101023.jar"/>

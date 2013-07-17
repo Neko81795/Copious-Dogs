@@ -26,8 +26,8 @@ public class BlockDogDish extends BlockContainer {
 	private Icon[] blockIcons;
 	
 	public BlockDogDish(int id) {
-		//TODO make this more reasonable?
-		super(id, Material.leaves);
+
+		super(id, CopiousDogs.plate);
 		setBlockBounds(.25F, 0F, .25F, .75F, .25F, .75F);
 		setCreativeTab(CopiousDogs.tabCopiousDogs);
 		setUnlocalizedName("dogDish");

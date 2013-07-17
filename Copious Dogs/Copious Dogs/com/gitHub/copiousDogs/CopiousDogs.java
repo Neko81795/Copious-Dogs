@@ -1,6 +1,8 @@
 package com.gitHub.copiousDogs;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
@@ -47,6 +49,11 @@ public class CopiousDogs
 	//
 	public static Item dogBiscuit;
 	public static Item dogCollar;
+	
+	//
+	//Materials
+	//
+	public static final Material plate = (new Material(MapColor.ironColor));
 	
 	//
 	//Blocks
