@@ -5,7 +5,7 @@ import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.world.World;
 
 public class Dog extends EntityTameable
-{	
+{
 	public Dog(World world)
 	{
 		super(world);
