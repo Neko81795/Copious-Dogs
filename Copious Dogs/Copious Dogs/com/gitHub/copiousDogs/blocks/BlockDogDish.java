@@ -26,8 +26,8 @@ public class BlockDogDish extends BlockContainer {
 	private Icon[] blockIcons;
 	
 	public BlockDogDish(int id) {
-		
-		super(id, Material.iron);
+		//TODO make this more reasonable?
+		super(id, Material.leaves);
 		setBlockBounds(.25F, 0F, .25F, .75F, .25F, .75F);
 		setCreativeTab(CopiousDogs.tabCopiousDogs);
 		setUnlocalizedName("dogDish");
@@ -141,7 +141,8 @@ public class BlockDogDish extends BlockContainer {
 				par1World.setBlock(par2, par3, par4, blockID, getBlockFromDye(stack.getItemDamage()), 2);
 				par1World.setBlockTileEntity(par2, par3, par4, tileEntity);
 				
-				stack.stackSize -= 1;
+				if(!par5EntityPlayer.capabilities.isCreativeMode)
+					stack.stackSize -= 1;
 			}
 		}
 		
