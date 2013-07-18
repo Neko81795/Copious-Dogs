@@ -11,7 +11,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
-public class Modelgoldenretriever extends ModelBase
+import com.gitHub.copiousDogs.mobs.Dog;
+
+public class ModelGoldenRetriever extends ModelBase
 {
 	  //fields
 	    ModelRenderer WolfHead;
@@ -26,7 +28,7 @@ public class Modelgoldenretriever extends ModelBase
 	    ModelRenderer Ear2;
 	    ModelRenderer Nose;
 	  
-	  public Modelgoldenretriever()
+	  public ModelGoldenRetriever()
 	  {
 	    textureWidth = 64;
 	    textureHeight = 32;
@@ -120,11 +122,45 @@ public class Modelgoldenretriever extends ModelBase
 	public void setLivingAnimations(EntityLivingBase entity,
 			float walkTime, float isWalking, float random)
 	{
+		if (entity instanceof Dog) {
+			
+			Dog dog = (Dog) entity;
+			
+			if (dog.isTailAnimated()) {
+				
+				this.Tail.rotateAngleY = MathHelper.cos(entity.ticksExisted * 0.8F) * 0.6F;
+			}
+			else {
+				
+				this.Tail.rotateAngleY = 0;
+			}
+			
+			if (dog.isBegging()) {
+				
+				this.Ear1.setRotationPoint(-1F, 11.5F, -7F);
+				this.Ear2.setRotationPoint(-1F, 11.5F, -7F);
+				this.Ear1.rotateAngleZ = (float) Math.toRadians(30);
+				this.Ear2.rotateAngleZ = (float) Math.toRadians(30);
+				this.WolfHead.rotateAngleZ = (float) Math.toRadians(30);
+				this.Nose.rotateAngleZ = (float) Math.toRadians(30);
+			}
+			
+			else {
+				
+				this.WolfHead.rotateAngleZ = 0;
+				this.Nose.rotateAngleZ = 0;
+				this.Ear1.setRotationPoint(-3F, 13.7F, -8F);
+				this.Ear2.setRotationPoint(2F, 13.5F, -8F);
+				setRotation(Ear1, 0F, 0F, 0.248884F);
+				setRotation(Ear2, 0F, 0F, -0.2488901F);
+				
+			}
+		}
+		
 		this.Leg1.rotateAngleX = MathHelper.cos(walkTime * 0.6662F) * 1.4F * isWalking;
         this.Leg2.rotateAngleX = MathHelper.cos(walkTime * 0.6662F + (float)Math.PI) * 1.4F * isWalking;
         this.Leg3.rotateAngleX = MathHelper.cos(walkTime * 0.6662F + (float)Math.PI) * 1.4F * isWalking;
         this.Leg4.rotateAngleX = MathHelper.cos(walkTime * 0.6662F) * 1.4F * isWalking;
-        this.Tail.rotateAngleY = MathHelper.cos(entity.ticksExisted * 0.8F) * 0.6F;
 		super.setLivingAnimations(entity, walkTime, isWalking, random);
 	}
 	  

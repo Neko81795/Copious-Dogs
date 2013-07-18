@@ -14,8 +14,10 @@ import net.minecraftforge.common.Configuration;
 
 import com.gitHub.copiousDogs.blocks.BlockDogDish;
 import com.gitHub.copiousDogs.blocks.tileentities.TileEntityDogDish;
+import com.gitHub.copiousDogs.handler.PacketHandler;
 import com.gitHub.copiousDogs.items.DogBiscuit;
 import com.gitHub.copiousDogs.items.DogCollar;
+import com.gitHub.copiousDogs.items.DogLeash;
 import com.gitHub.copiousDogs.mobs.GoldenRetriever;
 import com.gitHub.copiousDogs.mobs.Husky;
 
@@ -32,7 +34,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "CopiousDogs", name = "Copious Dogs", version = "0.0.0.0")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, versionBounds = "[0.0.0.0]")
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, versionBounds = "[0.0.0.0]",
+		channels = {Reference.CHANNEL_NAME}, packetHandler = PacketHandler.class)
 public class CopiousDogs
 {
 	//
@@ -50,6 +53,7 @@ public class CopiousDogs
 	//
 	public static Item dogBiscuit;
 	public static Item dogCollar;
+	public static Item dogLeash;
 	
 	//
 	//Materials
@@ -73,6 +77,7 @@ public class CopiousDogs
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) 
     {
+    	
     	//Loads the copiousdogs.cfg config file
     	Configuration config = new Configuration(event.getSuggestedConfigurationFile());
     	
@@ -81,8 +86,9 @@ public class CopiousDogs
     	//reads the config file for item ids
     	Reference.DOG_BISCUIT_ID = config.getItem("Dog biscuit:", 17001).getInt();
     	Reference.EGG_GOLDEN_RETRIEVER_ID = config.getItem("Egg Golden Retriever:", 17002).getInt();
-    	Reference.DOG_COLLAR_ID = config.getItem("Dog collar", 17003).getInt();
+    	Reference.DOG_COLLAR_ID = config.getItem("Dog collar:", 17003).getInt();
     	Reference.EGG_HUSKY_ID = config.getItem("Egg Husky:", 17004).getInt();
+    	Reference.DOG_LEASH_ID = config.getItem("Dog leash:", 17005).getInt();
     	
     	//reads the config file for block ids
     	Reference.DOG_DISH_ID = config.getBlock("Dog dish:", 1701).getInt();
@@ -109,6 +115,11 @@ public class CopiousDogs
     	//
     	dogCollar = new DogCollar(Reference.DOG_COLLAR_ID);
     	LanguageRegistry.addName(dogCollar, "Dog Collar");
+    	//
+    	//Dog leash
+    	//
+    	dogLeash = new DogLeash(Reference.DOG_LEASH_ID);
+    	LanguageRegistry.addName(dogLeash, "Dog Leash");
     	//
     	//Golden Retriever
     	//

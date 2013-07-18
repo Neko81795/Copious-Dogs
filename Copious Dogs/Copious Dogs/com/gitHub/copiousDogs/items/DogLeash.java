@@ -4,20 +4,15 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+import com.gitHub.copiousDogs.CopiousDogs;
 import com.gitHub.copiousDogs.mobs.Dog;
 
-public class DogBiscuit extends ItemCopiousDogs
-{
-	public DogBiscuit(int id)
-	{
-		super(id);
-		setUnlocalizedName("DogBiscuit");
-		setMaxStackSize(64);
-	}
+public class DogLeash extends ItemCopiousDogs {
 	
-	public float getHealAmount()
-	{
-		return 3;
+	public DogLeash(int id) {
+		
+		super(id);
+		setUnlocalizedName("dogLeash");
 	}
 	
 	@Override
@@ -27,24 +22,26 @@ public class DogBiscuit extends ItemCopiousDogs
 		if (par3EntityLivingBase instanceof Dog) {
 			
 			Dog dog = (Dog) par3EntityLivingBase;
-				
-			if (!dog.isTamed()) {
+			
+			if (dog.hasCollar()) {
 				
 				par2EntityPlayer.swingItem();
-						
-				dog.setTameValue((byte)(dog.getTameValue() + dog.getRNG().nextInt(10)));
-						
-				dog.tryToTame(par2EntityPlayer);
 				
-				if (!par2EntityPlayer.capabilities.isCreativeMode) {
+				if (!dog.isLeashed()) {
 					
-					par1ItemStack.stackSize--;
+					dog.setLeashed(true);
 				}
-						
+				else {
+					
+					dog.setLeashed(false);
+				}
+				
+				System.out.println(dog.isLeashed());
+				
 				return true;
 			}
 		}
-		
+			
 		return false;
 	}
 }

@@ -1,12 +1,14 @@
 package com.gitHub.copiousDogs.render.mobs;
 
-import com.gitHub.copiousDogs.mobs.GoldenRetriever;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.item.ItemDye;
 import net.minecraft.util.ResourceLocation;
+
+import com.gitHub.copiousDogs.mobs.Dog;
+import com.gitHub.copiousDogs.mobs.GoldenRetriever;
 
 public class RenderGoldenRetriever extends RenderLiving
 {
@@ -36,6 +38,17 @@ public class RenderGoldenRetriever extends RenderLiving
 	@Override
 	protected ResourceLocation func_110775_a(Entity entity)
 	{
+		
+		if (entity instanceof Dog) {
+			
+			Dog dog = (Dog) entity;
+			
+			if (dog.hasCollar()) {
+				
+				return new ResourceLocation("copiousDogs:textures/mobs/goldenretrievertexture_collar_" + ItemDye.field_94595_b[dog.getCollarColor()] + ".png");
+			}
+		}
+		
 		return new ResourceLocation("copiousDogs:textures/mobs/goldenretrievertexture.png");
 	}
 }

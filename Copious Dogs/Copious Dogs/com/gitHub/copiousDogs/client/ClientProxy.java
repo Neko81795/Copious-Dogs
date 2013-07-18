@@ -4,7 +4,7 @@ import com.gitHub.copiousDogs.CommonProxy;
 import com.gitHub.copiousDogs.mobs.GoldenRetriever;
 import com.gitHub.copiousDogs.mobs.Husky;
 import com.gitHub.copiousDogs.mobs.models.ModelHusky;
-import com.gitHub.copiousDogs.mobs.models.Modelgoldenretriever;
+import com.gitHub.copiousDogs.mobs.models.ModelGoldenRetriever;
 import com.gitHub.copiousDogs.render.blocks.DogDishRenderer;
 import com.gitHub.copiousDogs.render.mobs.RenderGoldenRetriever;
 import com.gitHub.copiousDogs.render.mobs.RenderHusky;
@@ -20,7 +20,7 @@ public class ClientProxy extends CommonProxy
 		//TODO uncomment when render issue is fixed
 		//CopiousDogs.dogDishRendererID = RenderingRegistry.getNextAvailableRenderId();
 		//RenderingRegistry.registerBlockHandler(CopiousDogs.dogDishRendererID, dogDishRenderer);
-		RenderingRegistry.registerEntityRenderingHandler(GoldenRetriever.class, new RenderGoldenRetriever(new Modelgoldenretriever(), 1));
+		RenderingRegistry.registerEntityRenderingHandler(GoldenRetriever.class, new RenderGoldenRetriever(new ModelGoldenRetriever(), 1));
 		RenderingRegistry.registerEntityRenderingHandler(Husky.class, new RenderHusky(new ModelHusky(), 1));
 	}
 }
