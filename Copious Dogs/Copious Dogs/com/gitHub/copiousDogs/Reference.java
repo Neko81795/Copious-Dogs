@@ -10,7 +10,9 @@ public class Reference
 	//Block IDs
 	public static int DOG_DISH_ID;
 	public static int EGG_GOLDEN_RETRIEVER_ID;
+	public static int EGG_HUSKY_ID;
 	
 	//Mob IDs (mod specific)
 	public static int MOB_GOLDEN_RETRIEVER_ID = 1;
+	public static int MOB_HUSKY_ID = 2;
 }

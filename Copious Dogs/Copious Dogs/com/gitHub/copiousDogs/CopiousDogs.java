@@ -17,6 +17,7 @@ import com.gitHub.copiousDogs.blocks.tileentities.TileEntityDogDish;
 import com.gitHub.copiousDogs.items.DogBiscuit;
 import com.gitHub.copiousDogs.items.DogCollar;
 import com.gitHub.copiousDogs.mobs.GoldenRetriever;
+import com.gitHub.copiousDogs.mobs.Husky;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -81,6 +82,7 @@ public class CopiousDogs
     	Reference.DOG_BISCUIT_ID = config.getItem("Dog biscuit:", 17001).getInt();
     	Reference.EGG_GOLDEN_RETRIEVER_ID = config.getItem("Egg Golden Retriever:", 17002).getInt();
     	Reference.DOG_COLLAR_ID = config.getItem("Dog collar", 17003).getInt();
+    	Reference.EGG_HUSKY_ID = config.getItem("Egg Husky:", 17004).getInt();
     	
     	//reads the config file for block ids
     	Reference.DOG_DISH_ID = config.getBlock("Dog dish:", 1701).getInt();
@@ -115,7 +117,17 @@ public class CopiousDogs
     	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.Golden Retriever.name", "Golden Retriever");
     	EntityList.IDtoClassMapping.put(Reference.EGG_GOLDEN_RETRIEVER_ID, GoldenRetriever.class);
     	EntityList.entityEggs.put(Reference.EGG_GOLDEN_RETRIEVER_ID,
-    			new EntityEggInfo(Reference.EGG_GOLDEN_RETRIEVER_ID, 0xFFFFFF , 0x000000));
+    			new EntityEggInfo(Reference.EGG_GOLDEN_RETRIEVER_ID, 0xbc8e5f , 0xddcdb6));
+    	//
+    	//Husky
+    	//
+    	EntityRegistry.registerModEntity(Husky.class, "Husky", Reference.MOB_HUSKY_ID, this, 40, 1, true);
+    	EntityRegistry.addSpawn(Husky.class, 1, 2, 8, EnumCreatureType.creature, BiomeGenBase.icePlains, BiomeGenBase.taiga,
+    			BiomeGenBase.taigaHills, BiomeGenBase.iceMountains);
+    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.Husky.name", "Husky");
+    	EntityList.IDtoClassMapping.put(Reference.EGG_HUSKY_ID, Husky.class);
+    	EntityList.entityEggs.put(Reference.EGG_HUSKY_ID,
+    			new EntityEggInfo(Reference.EGG_HUSKY_ID, 0x2b2e2d , 0x7e807d));
     	//
     	// Dog Dish
     	//
