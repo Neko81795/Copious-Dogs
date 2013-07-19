@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import com.gitHub.copiousDogs.mobs.Dog;
 import com.gitHub.copiousDogs.mobs.GoldenRetriever;
 
-public class RenderGoldenRetriever extends RenderLiving
+public class RenderGoldenRetriever extends RenderDog
 {
 
 	public RenderGoldenRetriever(ModelBase par1ModelBase, float par2)

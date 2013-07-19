@@ -89,7 +89,7 @@ public class ModelHusky extends ModelBase
 		Ear1.mirror = true;
 		setRotation(Ear1, 0F, 0F, 0F);
 		Ear2 = new ModelRenderer(this, 16, 13);
-		Ear2.addBox(0F, -6F, 0F, 2, 2, 1);
+		Ear2.addBox(0F, -5F, 0F, 2, 2, 1);
 		Ear2.setRotationPoint(0F, 12.5F, -7F);
 		Ear2.setTextureSize(64, 32);
 		Ear2.mirror = true;
