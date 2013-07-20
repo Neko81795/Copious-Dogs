@@ -21,6 +21,7 @@ import com.gitHub.copiousDogs.render.mobs.RenderHusky;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 public class ClientProxy extends CommonProxy
 {
+	@SuppressWarnings("unused")
 	private DogDishRenderer dogDishRenderer = new DogDishRenderer();
 	
 	@Override

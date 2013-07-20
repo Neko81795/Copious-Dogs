@@ -79,9 +79,9 @@ public class BlockDogDish extends BlockContainer {
 		return blockID;
 	}
 	
-	public int damageDropped(int par1)
+	public int damageDropped(int metadata)
     {
-        return 0;
+        return metadata;
     }
 	
 	@Override
@@ -100,6 +100,7 @@ public class BlockDogDish extends BlockContainer {
         return 15 - par0;
     }
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
     {
         for (int j = 0; j < 16; ++j)

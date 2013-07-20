@@ -17,6 +17,7 @@ import com.gitHub.copiousDogs.blocks.tileentities.TileEntityDogDish;
 import com.gitHub.copiousDogs.handler.PacketHandler;
 import com.gitHub.copiousDogs.items.DogBiscuit;
 import com.gitHub.copiousDogs.items.DogCollar;
+import com.gitHub.copiousDogs.items.DogDishItem;
 import com.gitHub.copiousDogs.items.DogLeash;
 import com.gitHub.copiousDogs.mobs.BerneseMountain;
 import com.gitHub.copiousDogs.mobs.Chihuahua;
@@ -176,7 +177,7 @@ public class CopiousDogs
     	// Dog Dish
     	//
     	dogDish = new BlockDogDish(Reference.DOG_DISH_ID);
-    	GameRegistry.registerBlock(dogDish, "dogDish");
+    	GameRegistry.registerBlock(dogDish, DogDishItem.class, "dogDish");
     	GameRegistry.registerTileEntity(TileEntityDogDish.class, "dog_dish_entity");
     	LanguageRegistry.addName(dogDish, "Dog Dish");
     	
