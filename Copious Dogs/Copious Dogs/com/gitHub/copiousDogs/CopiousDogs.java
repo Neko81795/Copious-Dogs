@@ -18,6 +18,9 @@ import com.gitHub.copiousDogs.handler.PacketHandler;
 import com.gitHub.copiousDogs.items.DogBiscuit;
 import com.gitHub.copiousDogs.items.DogCollar;
 import com.gitHub.copiousDogs.items.DogLeash;
+import com.gitHub.copiousDogs.mobs.BerneseMountain;
+import com.gitHub.copiousDogs.mobs.Chihuahua;
+import com.gitHub.copiousDogs.mobs.FrenchBullDog;
 import com.gitHub.copiousDogs.mobs.GoldenRetriever;
 import com.gitHub.copiousDogs.mobs.Husky;
 
@@ -89,6 +92,9 @@ public class CopiousDogs
     	Reference.DOG_COLLAR_ID = config.getItem("Dog collar:", 17003).getInt();
     	Reference.EGG_HUSKY_ID = config.getItem("Egg Husky:", 17004).getInt();
     	Reference.DOG_LEASH_ID = config.getItem("Dog leash:", 17005).getInt();
+    	Reference.EGG_BERNESE_MOUNTAIN_ID = config.getItem("Egg Bernese Mountain:", 17006).getInt();
+    	Reference.EGG_CHIHUAHUA_ID = config.getItem("Egg Chihuahua:", 17007).getInt();
+    	Reference.EGG_FRENCH_BULLDOG_ID = config.getItem("Egg French Bulldog:", 17008).getInt();
     	
     	//reads the config file for block ids
     	Reference.DOG_DISH_ID = config.getBlock("Dog dish:", 1701).getInt();
@@ -139,6 +145,33 @@ public class CopiousDogs
     	EntityList.IDtoClassMapping.put(Reference.EGG_HUSKY_ID, Husky.class);
     	EntityList.entityEggs.put(Reference.EGG_HUSKY_ID,
     			new EntityEggInfo(Reference.EGG_HUSKY_ID, 0x2b2e2d , 0x7e807d));
+    	//
+    	//Bernese Mountain
+    	//
+    	EntityRegistry.registerModEntity(BerneseMountain.class, "Bernese Mountain", Reference.MOB_BERNESE_MOUNTAIN_ID, this, 40, 1, true);
+    	EntityRegistry.addSpawn(BerneseMountain.class, 1, 2, 8, EnumCreatureType.creature, BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsEdge);
+    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.Bernese Mountain.name", "Bernese Mountain");
+    	EntityList.IDtoClassMapping.put(Reference.EGG_BERNESE_MOUNTAIN_ID, BerneseMountain.class);
+    	EntityList.entityEggs.put(Reference.EGG_BERNESE_MOUNTAIN_ID,
+    			new EntityEggInfo(Reference.EGG_BERNESE_MOUNTAIN_ID, 0x04070e , 0x723f21));
+    	//
+    	//Chihuahua
+    	//
+    	EntityRegistry.registerModEntity(Chihuahua.class, "Chihuahua", Reference.MOB_CHIHUAHUA_ID, this, 40, 1, true);
+    	EntityRegistry.addSpawn(Chihuahua.class, 1, 2, 8, EnumCreatureType.creature, BiomeGenBase.plains);
+    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.Chihuahua.name", "Chihuahua");
+    	EntityList.IDtoClassMapping.put(Reference.EGG_CHIHUAHUA_ID, Chihuahua.class);
+    	EntityList.entityEggs.put(Reference.EGG_CHIHUAHUA_ID,
+    			new EntityEggInfo(Reference.EGG_CHIHUAHUA_ID, 0xc7a087 , 0x9e7f6b));
+    	//
+    	//French Bulldog
+    	//
+    	EntityRegistry.registerModEntity(FrenchBullDog.class, "French Bulldog", Reference.MOB_FRENCH_BULLDOG_ID, this, 40, 1, true);
+    	EntityRegistry.addSpawn(FrenchBullDog.class, 1, 2, 8, EnumCreatureType.creature, BiomeGenBase.plains);
+    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.French Bulldog.name", "French Bulldog");
+    	EntityList.IDtoClassMapping.put(Reference.EGG_FRENCH_BULLDOG_ID, FrenchBullDog.class);
+    	EntityList.entityEggs.put(Reference.EGG_FRENCH_BULLDOG_ID,
+    			new EntityEggInfo(Reference.EGG_FRENCH_BULLDOG_ID, 0x151618 , 0xbdbdb7));
     	//
     	// Dog Dish
     	//

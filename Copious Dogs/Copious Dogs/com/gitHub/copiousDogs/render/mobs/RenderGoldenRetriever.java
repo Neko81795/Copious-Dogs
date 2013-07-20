@@ -13,9 +13,9 @@ import com.gitHub.copiousDogs.mobs.GoldenRetriever;
 public class RenderGoldenRetriever extends RenderLiving
 {
 
-	public RenderGoldenRetriever(ModelBase par1ModelBase, float par2)
+	public RenderGoldenRetriever(ModelBase par1ModelBase, float shadowSize)
 	{
-		super(par1ModelBase, par2);
+		super(par1ModelBase, shadowSize);
 		// TODO Auto-generated constructor stub
 	}
 

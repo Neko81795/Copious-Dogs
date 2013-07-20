@@ -5,29 +5,20 @@
 // - ZeuX
 package com.gitHub.copiousDogs.mobs.models;
 
-import net.minecraft.client.model.ModelBase;
+import com.gitHub.copiousDogs.mobs.Dog;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.MathHelper;
 
-import com.gitHub.copiousDogs.mobs.Dog;
-
-public class ModelGoldenRetriever extends ModelBase
+public class ModelGoldenRetriever extends DogModelBase
 {
-	// fields
-	ModelRenderer WolfHead;
-	ModelRenderer Body;
-	ModelRenderer Mane;
-	ModelRenderer Leg1;
-	ModelRenderer Leg2;
-	ModelRenderer Leg3;
-	ModelRenderer Leg4;
-	ModelRenderer Tail;
-	ModelRenderer Ear1;
-	ModelRenderer Ear2;
-	ModelRenderer Nose;
-
+	@Override
+	protected void setRotation(ModelRenderer model, float x, float y, float z)
+	{
+		super.setRotation(model, x, y, z);
+	}
+	
 	public ModelGoldenRetriever()
 	{
 		textureWidth = 64;
@@ -127,15 +118,6 @@ public class ModelGoldenRetriever extends ModelBase
 		// entity will always be instance of dog. instanceof calls are slow
 		Dog dog = (Dog) entity;
 
-		if (dog.isTailAnimated())
-		{
-			this.Tail.rotateAngleY = MathHelper.cos(entity.ticksExisted * 0.8F) * 0.6F;
-		}
-		else
-		{
-			this.Tail.rotateAngleY = 0;
-		}
-
 		if (dog.isBegging())
 		{
 			this.Ear1.setRotationPoint(-1F, 11.5F, -7F);
@@ -145,7 +127,6 @@ public class ModelGoldenRetriever extends ModelBase
 			this.WolfHead.rotateAngleZ = (float) Math.toRadians(30);
 			this.Nose.rotateAngleZ = (float) Math.toRadians(30);
 		}
-
 		else
 		{
 			this.WolfHead.rotateAngleZ = 0;
@@ -154,21 +135,9 @@ public class ModelGoldenRetriever extends ModelBase
 			this.Ear2.setRotationPoint(2F, 13.5F, -8F);
 			setRotation(Ear1, 0F, 0F, 0.248884F);
 			setRotation(Ear2, 0F, 0F, -0.2488901F);
-
 		}
-
-		this.Leg1.rotateAngleX = MathHelper.cos(walkTime * 0.6662F) * 1.4F * isWalking;
-		this.Leg2.rotateAngleX = MathHelper.cos(walkTime * 0.6662F + (float) Math.PI) * 1.4F * isWalking;
-		this.Leg3.rotateAngleX = MathHelper.cos(walkTime * 0.6662F + (float) Math.PI) * 1.4F * isWalking;
-		this.Leg4.rotateAngleX = MathHelper.cos(walkTime * 0.6662F) * 1.4F * isWalking;
+				
 		super.setLivingAnimations(entity, walkTime, isWalking, random);
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
 	}
 
 	@Override
@@ -177,5 +146,4 @@ public class ModelGoldenRetriever extends ModelBase
 	{
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 	}
-
 }
