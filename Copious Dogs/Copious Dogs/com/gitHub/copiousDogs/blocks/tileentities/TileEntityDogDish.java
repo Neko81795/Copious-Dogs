@@ -2,6 +2,7 @@ package com.gitHub.copiousDogs.blocks.tileentities;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityDogDish extends TileEntity {
@@ -13,19 +14,19 @@ public class TileEntityDogDish extends TileEntity {
 	 * to eat the exact amount of food they need until they're
 	 * full.
 	 */
-	private int foodLevel;
+	private float foodLevel = 0;
 	
 	/**
 	 * The maximum amount of food this dog dish can store.
 	 */
-	private int maxFoodLevel = 30;
+	private float maxFoodLevel = 30;
 	
 	public TileEntityDogDish() {
 		
 		foodLevel = 0;
 	}
 	
-	public int getFoodLevel() {
+	public float getFoodLevel() {
 		
 		return foodLevel;
 	}
@@ -55,6 +56,8 @@ public class TileEntityDogDish extends TileEntity {
 	 */
 	public boolean addFood(ItemStack stack) {
 		
+		System.out.println(foodLevel);
+		
 		if (stack == null) return false;
 		
 		int foodAmount = getFoodModValue(stack.itemID);
@@ -73,7 +76,6 @@ public class TileEntityDogDish extends TileEntity {
 			else {
 				
 				foodLevel += foodAmount;
-				System.out.println(foodLevel);
 				return true;
 			}
 		}
@@ -91,7 +93,7 @@ public class TileEntityDogDish extends TileEntity {
 	 * @param amount
 	 * @returns The amount of food removed
 	 */
-	public int eat(int amount) {
+	public float eat(float amount) {
 		
 		if (foodLevel != 0) {
 			
@@ -108,5 +110,26 @@ public class TileEntityDogDish extends TileEntity {
 		}
 		
 		return -1;
+	}
+	
+	public boolean canEat(float amount) {
+		
+		return foodLevel - amount >= 0;
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+		
+		super.writeToNBT(par1nbtTagCompound);
+		
+		par1nbtTagCompound.setFloat("FoodLevel", foodLevel);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+		
+		super.readFromNBT(par1nbtTagCompound);
+		
+		foodLevel = par1nbtTagCompound.getFloat("FoodLevel");
 	}
 }

@@ -23,7 +23,7 @@ public class DogLeash extends ItemCopiousDogs {
 			
 			Dog dog = (Dog) par3EntityLivingBase;
 			
-			if (dog.hasCollar()) {
+			if (dog.hasCollar() && dog.getOwnerName() == par2EntityPlayer.getEntityName()) {
 				
 				par2EntityPlayer.swingItem();
 				

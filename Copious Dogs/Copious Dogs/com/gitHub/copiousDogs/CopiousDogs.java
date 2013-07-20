@@ -189,10 +189,12 @@ public class CopiousDogs
     	GameRegistry.addRecipe(new ItemStack(dogBiscuit), " m ", "mbm", " m ", 'm', Item.porkRaw, 'b', Item.bone);
     	GameRegistry.addRecipe(new ItemStack(dogDish), "III", "IBI", "III", 'I', Item.ingotIron, 'B', Item.bucketEmpty);
     	GameRegistry.addRecipe(new ItemStack(dogCollar), "SSS", "S S", "SSI", 'S', Item.silk, 'I', Item.ingotIron);
-    	
+    	GameRegistry.addRecipe(new ItemStack(dogLeash), "SS", "SS", "SS", 'S', Item.silk);
+    
     	for (int i = 0; i < 16; i++) {
     		
-    		GameRegistry.addShapelessRecipe(new ItemStack(dogDish, 1, i), new ItemStack(Item.dyePowder, 1, i), dogDish);
+    		GameRegistry.addShapelessRecipe(new ItemStack(dogDish, 1, i), new ItemStack(Item.dyePowder, 1, BlockDogDish.getDyeFromBlock(i)), dogDish);
+    		GameRegistry.addShapelessRecipe(new ItemStack(dogCollar, 1, i), new ItemStack(Item.dyePowder, 1, DogCollar.getDyeFromItem(i)), dogCollar);
     	}
     }
     

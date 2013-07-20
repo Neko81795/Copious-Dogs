@@ -1,25 +1,21 @@
 package com.gitHub.copiousDogs.mobs;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.Random;
-
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import com.gitHub.copiousDogs.CopiousDogs;
-import com.gitHub.copiousDogs.items.DogCollar;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIBegBiscuit;
+import com.gitHub.copiousDogs.mobs.ai.EntityAIEatDogDish;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIFollowOwnerLeashed;
 
 public class Dog extends EntityTameable
@@ -52,24 +48,49 @@ public class Dog extends EntityTameable
 		return (this.dataWatcher.getWatchableObjectByte(18) & 8) != 0;
 	}
 	
+	public boolean isEating() {
+		
+		return (this.dataWatcher.getWatchableObjectByte(18) & 16) != 0;
+	}
+	
 	public void setHasCollar(boolean par0) {
 		
-		this.dataWatcher.updateObject(18, (byte) (this.dataWatcher.getWatchableObjectByte(18) + (par0 ? 4:-4)));
+		if (this.hasCollar() != par0) { 
+			this.dataWatcher.updateObject(18, (byte) (this.dataWatcher.getWatchableObjectByte(18) + (par0 ? 4:-4)));
+		}
 	}
 	
 	public void setTailAnimated(boolean par0) {
 		
-		this.dataWatcher.updateObject(18, (byte) (this.dataWatcher.getWatchableObjectByte(18) + (par0 ? 1:-1)));
+		if (this.isTailAnimated() != par0) {
+			this.dataWatcher.updateObject(18, (byte) (this.dataWatcher.getWatchableObjectByte(18) + (par0 ? 1:-1)));
+		}
 	}
 	
 	public void setBegging(boolean par0) {
 		
-		this.dataWatcher.updateObject(18, (byte) (this.dataWatcher.getWatchableObjectByte(18) + (par0 ? 2:-2)));
+		if (this.isBegging() != par0) {
+			this.dataWatcher.updateObject(18, (byte) (this.dataWatcher.getWatchableObjectByte(18) + (par0 ? 2:-2)));
+		}
 	}
 	
 	public void setLeashed(boolean par0) {
 		
-		this.dataWatcher.updateObject(18, (byte) (this.dataWatcher.getWatchableObjectByte(18) + (par0 ? 8:-8)));
+		if (this.isLeashed() != par0) {
+			this.dataWatcher.updateObject(18, (byte) (this.dataWatcher.getWatchableObjectByte(18) + (par0 ? 8:-8)));
+		}
+	}
+	
+	public void setEating(boolean par0) {
+		
+		if (this.isEating() != par0) {
+			this.dataWatcher.updateObject(18, (byte) (this.dataWatcher.getWatchableObjectByte(18) + (par0 ? 16: -16)));
+		}
+	}
+	
+	public float getMaxHealth() {
+		
+		return 15;
 	}
 	
 	public byte getCollarColor() {
@@ -122,6 +143,8 @@ public class Dog extends EntityTameable
 	protected void updateAITick() {
 		
 		this.dataWatcher.updateObject(19, new Float(this.func_110143_aJ()));
+		
+		
 	}
 	
 	@Override
@@ -140,14 +163,33 @@ public class Dog extends EntityTameable
 		this.moveSpeed = moveSpeed;
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIFollowOwnerLeashed(this, moveSpeed, 5.0F, 2.0F));
-		this.tasks.addTask(2, new EntityAIWander(this, moveSpeed));
+		this.tasks.addTask(1, this.aiSit);
+		this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
+		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, .75F, true));
+		this.tasks.addTask(4, new EntityAIEatDogDish(this, 20F));
+		this.tasks.addTask(5, new EntityAIFollowOwnerLeashed(this, moveSpeed, 5.0F, 2.0F));
+		this.tasks.addTask(6, new EntityAIWander(this, moveSpeed));
 		this.tasks.addTask(8, new EntityAIBegBiscuit(this, 2F));
     	this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     	this.tasks.addTask(9, new EntityAILookIdle(this));
+    	
+    	this.setEntityHealth(getMaxHealth());
+	}
+	
+	@Override
+	public boolean getAlwaysRenderNameTag() {
+		
+		return isTamed() && hasCustomNameTag();
 	}
 
-
+	@Override
+	public void setCustomNameTag(String par1Str) {
+		
+		if (isTamed()) {
+			super.setCustomNameTag(par1Str);
+		}
+	}
+	
 	public void setTamed(boolean par1)
 	{
 		super.setTamed(par1);
@@ -201,5 +243,37 @@ public class Dog extends EntityTameable
 	public EntityAgeable createChild(EntityAgeable entityageable) {
 		
 		return null;
+	}
+	
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1nbtTagCompound) {
+		
+		super.writeEntityToNBT(par1nbtTagCompound);
+		
+		par1nbtTagCompound.setBoolean("TailAnimated", isTailAnimated());
+		par1nbtTagCompound.setBoolean("Begging", isBegging());
+		par1nbtTagCompound.setBoolean("Leashed", isLeashed());
+		
+		NBTTagCompound collar = new NBTTagCompound();
+		
+		collar.setBoolean("HasCollar", hasCollar());
+		collar.setByte("CollarColor", getCollarColor());
+		
+		par1nbtTagCompound.setCompoundTag("Collar", collar);
+	}
+	
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1nbtTagCompound) {
+		
+		super.readEntityFromNBT(par1nbtTagCompound);
+		
+		setTailAnimated(par1nbtTagCompound.getBoolean("TailAnimated"));
+		setBegging(par1nbtTagCompound.getBoolean("Begging"));
+		setLeashed(par1nbtTagCompound.getBoolean("Leashed"));
+		
+		NBTTagCompound collar = par1nbtTagCompound.getCompoundTag("Collar");
+		
+		setHasCollar(collar.getBoolean("HasCollar"));
+		setCollarColor(collar.getByte("CollarColor"));
 	}
 }

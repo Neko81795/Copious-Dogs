@@ -8,7 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderHusky extends RenderLiving
+public class RenderHusky extends RenderDog
 {
 	public RenderHusky(ModelBase par1ModelBase, float shadowSize)
 	{
