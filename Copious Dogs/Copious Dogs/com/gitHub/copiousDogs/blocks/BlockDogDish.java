@@ -121,18 +121,18 @@ public class BlockDogDish extends BlockContainer {
 	
 	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3,
-			int par4, EntityPlayer par5EntityPlayer, int par6, float par7,
+			int par4, EntityPlayer entity, int par6, float par7,
 			float par8, float par9) {
 		
 		TileEntityDogDish tileEntity = (TileEntityDogDish)par1World.getBlockTileEntity(par2, par3, par4);
 		
-		ItemStack stack = par5EntityPlayer.getCurrentEquippedItem();
+		ItemStack stack = entity.getCurrentEquippedItem();
 		
 		if (stack != null) {
 		
 			boolean foodAdded = tileEntity.addFood(stack);
 			
-			if (foodAdded) {
+			if (foodAdded && !entity.capabilities.isCreativeMode) {
 			
 				stack.stackSize -= 1;
 			}
@@ -142,12 +142,12 @@ public class BlockDogDish extends BlockContainer {
 				par1World.setBlock(par2, par3, par4, blockID, getBlockFromDye(stack.getItemDamage()), 2);
 				par1World.setBlockTileEntity(par2, par3, par4, tileEntity);
 				
-				if(!par5EntityPlayer.capabilities.isCreativeMode)
+				if(!entity.capabilities.isCreativeMode)
 					stack.stackSize -= 1;
 			}
 		}
 		
-		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer,
+		return super.onBlockActivated(par1World, par2, par3, par4, entity,
 				par6, par7, par8, par9);
 	}
 	
