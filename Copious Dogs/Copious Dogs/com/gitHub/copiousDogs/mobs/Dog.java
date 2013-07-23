@@ -1,5 +1,7 @@
 package com.gitHub.copiousDogs.mobs;
 
+import java.lang.reflect.Constructor;
+
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -231,18 +233,29 @@ public class Dog extends EntityTameable
 		return this.dataWatcher.getWatchableObjectByte(20);
 	}
 	
+	@SuppressWarnings("unused")
 	@Override
-	public boolean interact(EntityPlayer par1EntityPlayer) {
-	
+	public boolean interact(EntityPlayer par1EntityPlayer) 
+	{
 		ItemStack stack = par1EntityPlayer.getCurrentEquippedItem();
 	
-		return false;
+		return super.interact(par1EntityPlayer);
 	}
 
 	@Override
-	public EntityAgeable createChild(EntityAgeable entityageable) {
-		
-		return null;
+	public EntityAgeable createChild(EntityAgeable entity) 
+	{
+		try
+		{
+			Class<?> newClass = Class.forName(entity.getClass().getName());
+			Constructor<?> construct = newClass.getConstructor(World.class);
+			return (EntityAgeable) construct.newInstance(entity.worldObj);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	@Override

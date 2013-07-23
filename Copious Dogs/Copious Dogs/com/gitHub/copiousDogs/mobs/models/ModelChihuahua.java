@@ -6,6 +6,8 @@
 
 package com.gitHub.copiousDogs.mobs.models;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
@@ -98,17 +100,42 @@ public class ModelChihuahua extends DogModelBase
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		WolfHead.render(f5);
-		Body.render(f5);
-		Mane.render(f5);
-		Leg1.render(f5);
-		Leg2.render(f5);
-		Leg3.render(f5);
-		Leg4.render(f5);
-		Tail.render(f5);
-		Ear1.render(f5);
-		Ear2.render(f5);
-		Nose.render(f5);
+		if (this.isChild)
+        {
+            float f6 = 2.0F;
+            GL11.glPushMatrix();
+            GL11.glTranslatef(0.0F, 5.0F * f5, 2.0F * f5);
+            WolfHead.render(f5);
+        	Ear1.render(f5);
+        	Ear2.render(f5);
+        	Nose.render(f5);
+        	GL11.glPopMatrix();
+        	GL11.glPushMatrix();
+        	GL11.glScalef(1.0F / f6, 1.0F / f6, 1.0F / f6);
+        	GL11.glTranslatef(0.0F, 24.0F * f5, 0.0F);
+        	Body.render(f5);
+        	Mane.render(f5);
+        	Leg1.render(f5);
+        	Leg2.render(f5);
+        	Leg3.render(f5);
+        	Leg4.render(f5);
+        	Tail.render(f5);
+            GL11.glPopMatrix();
+        }
+        else
+        {
+        	WolfHead.render(f5);
+        	Ear1.render(f5);
+        	Ear2.render(f5);
+        	Nose.render(f5);
+        	Body.render(f5);
+        	Mane.render(f5);
+        	Leg1.render(f5);
+        	Leg2.render(f5);
+        	Leg3.render(f5);
+        	Leg4.render(f5);
+        	Tail.render(f5);
+        }
 	}
 
 	@Override

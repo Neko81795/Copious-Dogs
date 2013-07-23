@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.src.ModLoader;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.Configuration;
 
@@ -52,6 +53,7 @@ public class CopiousDogs
                 return new ItemStack(dogBiscuit, 1, 0);
         }
 	};
+
 	//
 	//Items
 	//
