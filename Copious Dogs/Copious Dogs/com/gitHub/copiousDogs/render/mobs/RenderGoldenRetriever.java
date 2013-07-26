@@ -15,7 +15,7 @@ public class RenderGoldenRetriever extends RenderDog
 
 	public RenderGoldenRetriever(ModelBase par1ModelBase, float shadowSize)
 	{
-		super(par1ModelBase, shadowSize);
+		super(par1ModelBase, shadowSize, "goldenretrievertexture");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -34,21 +34,4 @@ public class RenderGoldenRetriever extends RenderDog
     {
         renderTutorial((GoldenRetriever)par1Entity, par2, par4, par6, par8, par9);
     }
-
-	@Override
-	protected ResourceLocation func_110775_a(Entity entity)
-	{
-		
-		if (entity instanceof Dog) {
-			
-			Dog dog = (Dog) entity;
-			
-			if (dog.hasCollar()) {
-				
-				return new ResourceLocation("copiousDogs:textures/mobs/goldenretrievertexture_collar_" + ItemDye.field_94595_b[dog.getCollarColor()] + ".png");
-			}
-		}
-		
-		return new ResourceLocation("copiousDogs:textures/mobs/goldenretrievertexture.png");
-	}
 }

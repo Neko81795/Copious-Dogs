@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -17,10 +18,13 @@ import com.gitHub.copiousDogs.mobs.Dog;
 
 public class RenderDog extends RenderLiving {
 
-	public RenderDog(ModelBase par1ModelBase, float par2) {
+	String texture;
+	
+	public RenderDog(ModelBase par1ModelBase, float par2, String texture) {
 		super(par1ModelBase, par2);
+		this.texture = texture;
 	}
-
+	
 	@Override
 	protected void passSpecialRender(EntityLivingBase par1EntityLivingBase,
 			double par2, double par4, double par6) {
@@ -147,11 +151,10 @@ public class RenderDog extends RenderLiving {
         }
         MinecraftForge.EVENT_BUS.post(new RenderLivingEvent.Specials.Post(par1EntityLivingBase, this));
 	}
-	
 	@Override
 	protected ResourceLocation func_110775_a(Entity entity) {
 		
-		return null;
+		return new ResourceLocation("copiousDogs:textures/mobs/" + texture + ".png");
 	}
 
 }

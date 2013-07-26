@@ -31,6 +31,7 @@ public class BlockDogDish extends BlockContainer {
 		setBlockBounds(.25F, 0F, .25F, .75F, .25F, .75F);
 		setCreativeTab(CopiousDogs.tabCopiousDogs);
 		setUnlocalizedName("dogDish");
+		setLightOpacity(1);
 		
 	}
 	
