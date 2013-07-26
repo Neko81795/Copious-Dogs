@@ -1,6 +1,10 @@
 package com.gitHub.copiousDogs.mobs;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.util.Random;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -10,12 +14,16 @@ import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
+import com.gitHub.copiousDogs.CopiousDogs;
+import com.gitHub.copiousDogs.items.DogCollar;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIBegBiscuit;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIEatDogDish;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIFollowOwnerLeashed;
@@ -55,6 +63,11 @@ public class Dog extends EntityTameable
 		return (this.dataWatcher.getWatchableObjectByte(18) & 16) != 0;
 	}
 	
+	public boolean shouldRoamNearDogDish() {
+		
+		return (this.dataWatcher.getWatchableObjectByte(18) & 32) != 0;
+	}
+	
 	public void setHasCollar(boolean par0) {
 		
 		if (this.hasCollar() != par0) { 
@@ -87,6 +100,42 @@ public class Dog extends EntityTameable
 		
 		if (this.isEating() != par0) {
 			this.dataWatcher.updateObject(18, (byte) (this.dataWatcher.getWatchableObjectByte(18) + (par0 ? 16: -16)));
+		}
+	}
+	
+	@Override
+	public void onDeath(DamageSource par1DamageSource) {
+		
+		if (hasCollar()) {
+			
+			ByteArrayOutputStream bos = new ByteArrayOutputStream(36);
+			DataOutputStream out = new DataOutputStream(bos);
+			
+			try {
+				
+				Random rand = this.getRNG();
+				
+				ItemStack collar = new ItemStack(CopiousDogs.dogCollar.itemID, 1, DogCollar.getItemFromDye(getCollarColor()));
+				EntityItem item = this.entityDropItem(collar, 1F);
+				item.motionY += rand.nextFloat() * .5F;
+				item.motionX += (rand.nextFloat() - rand.nextFloat()) * .1F;
+				item.motionZ += (rand.nextFloat() - rand.nextFloat()) * .1F;
+				
+				out.writeInt(0);
+				out.writeFloat((float) item.posX);
+				out.writeFloat((float) item.posY);
+				out.writeFloat((float) item.posZ);
+				out.writeFloat((float) item.motionX);
+				out.writeFloat((float) item.motionY);
+				out.writeFloat((float) item.motionZ);
+				out.writeInt(collar.itemID);
+				out.writeInt(1);
+				out.writeInt(collar.getItemDamage());
+				
+			}catch(IOException e) {
+				
+				System.out.println("Unable to send packet.");
+			}
 		}
 	}
 	
@@ -169,8 +218,8 @@ public class Dog extends EntityTameable
 		this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
 		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, .75F, true));
 		this.tasks.addTask(4, new EntityAIEatDogDish(this, 20F));
-		this.tasks.addTask(5, new EntityAIFollowOwnerLeashed(this, moveSpeed, 5.0F, 2.0F));
-		this.tasks.addTask(6, new EntityAIWander(this, moveSpeed));
+		this.tasks.addTask(6, new EntityAIFollowOwnerLeashed(this, moveSpeed, 5.0F, 2.0F));
+		this.tasks.addTask(7, new EntityAIWander(this, moveSpeed));
 		this.tasks.addTask(8, new EntityAIBegBiscuit(this, 2F));
     	this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     	this.tasks.addTask(9, new EntityAILookIdle(this));
@@ -232,14 +281,24 @@ public class Dog extends EntityTameable
 		
 		return this.dataWatcher.getWatchableObjectByte(20);
 	}
-	
-	@SuppressWarnings("unused")
+
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer) 
 	{
-		ItemStack stack = par1EntityPlayer.getCurrentEquippedItem();
-	
-		return super.interact(par1EntityPlayer);
+		
+		if (par1EntityPlayer.getCurrentEquippedItem() == null) {
+			if (isSitting()) {	
+				this.setSitting(false);
+				return true;
+			}
+			else {
+			
+				setSitting(true);
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	@Override

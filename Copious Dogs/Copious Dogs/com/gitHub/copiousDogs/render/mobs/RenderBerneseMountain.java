@@ -7,11 +7,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderBerneseMountain extends RenderLiving
+public class RenderBerneseMountain extends RenderDog
 {
 	public RenderBerneseMountain(ModelBase par1ModelBase, float shadowSize)
 	{
-		super(par1ModelBase, shadowSize);
+		super(par1ModelBase, shadowSize, "bernesemountaindogtexture");
 	}
 
 	public void renderTutorial(BerneseMountain entity, double par2, double par4, double par6, float par8, float par9)
@@ -29,10 +29,4 @@ public class RenderBerneseMountain extends RenderLiving
     {
         renderTutorial((BerneseMountain)par1Entity, par2, par4, par6, par8, par9);
     }
-
-	@Override
-	protected ResourceLocation func_110775_a(Entity entity)
-	{
-		return new ResourceLocation("copiousDogs:textures/mobs/bernesemountaindogtexture.png");
-	}
 }

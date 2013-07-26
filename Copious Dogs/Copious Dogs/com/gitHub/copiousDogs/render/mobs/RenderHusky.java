@@ -12,7 +12,7 @@ public class RenderHusky extends RenderDog
 {
 	public RenderHusky(ModelBase par1ModelBase, float shadowSize)
 	{
-		super(par1ModelBase, shadowSize);
+		super(par1ModelBase, shadowSize, "huskytexture");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -31,10 +31,4 @@ public class RenderHusky extends RenderDog
     {
         renderTutorial((Husky)par1Entity, par2, par4, par6, par8, par9);
     }
-
-	@Override
-	protected ResourceLocation func_110775_a(Entity entity)
-	{
-		return new ResourceLocation("copiousDogs:textures/mobs/huskytexture.png");
-	}
 }

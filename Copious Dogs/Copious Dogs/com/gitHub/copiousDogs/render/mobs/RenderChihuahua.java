@@ -7,11 +7,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderChihuahua extends RenderLiving
+public class RenderChihuahua extends RenderDog
 {
 	public RenderChihuahua(ModelBase par1ModelBase, float par2)
 	{
-		super(par1ModelBase, par2);
+		super(par1ModelBase, par2, "chihuahuatexture");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -30,10 +30,4 @@ public class RenderChihuahua extends RenderLiving
     {
         renderTutorial((Chihuahua)par1Entity, par2, par4, par6, par8, par9);
     }
-
-	@Override
-	protected ResourceLocation func_110775_a(Entity entity)
-	{
-		return new ResourceLocation("copiousDogs:textures/mobs/chihuahuatexture.png");
-	}
 }

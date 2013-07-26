@@ -11,7 +11,7 @@ public class RenderGermanShepherd extends RenderDog
 {
 	public RenderGermanShepherd(ModelBase par1ModelBase, float shadowSize)
 	{
-		super(par1ModelBase, shadowSize);
+		super(par1ModelBase, shadowSize, "germanshepherdtexture");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -30,10 +30,4 @@ public class RenderGermanShepherd extends RenderDog
     {
         renderTutorial((GermanShepherd)par1Entity, par2, par4, par6, par8, par9);
     }
-
-	@Override
-	protected ResourceLocation func_110775_a(Entity entity)
-	{
-		return new ResourceLocation("copiousDogs:textures/mobs/germanshepherdtexture.png");
-	}
 }
