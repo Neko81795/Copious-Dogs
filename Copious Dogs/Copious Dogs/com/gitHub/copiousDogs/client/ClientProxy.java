@@ -4,17 +4,20 @@ import com.gitHub.copiousDogs.CommonProxy;
 import com.gitHub.copiousDogs.mobs.BerneseMountain;
 import com.gitHub.copiousDogs.mobs.Chihuahua;
 import com.gitHub.copiousDogs.mobs.FrenchBullDog;
+import com.gitHub.copiousDogs.mobs.GermanShepherd;
 import com.gitHub.copiousDogs.mobs.GoldenRetriever;
 import com.gitHub.copiousDogs.mobs.Husky;
 import com.gitHub.copiousDogs.mobs.models.ModelBerneseMountainDog;
 import com.gitHub.copiousDogs.mobs.models.ModelChihuahua;
 import com.gitHub.copiousDogs.mobs.models.ModelFrenchBulldog;
+import com.gitHub.copiousDogs.mobs.models.ModelGermanShepherd;
 import com.gitHub.copiousDogs.mobs.models.ModelHusky;
 import com.gitHub.copiousDogs.mobs.models.ModelGoldenRetriever;
 import com.gitHub.copiousDogs.render.blocks.DogDishRenderer;
 import com.gitHub.copiousDogs.render.mobs.RenderBerneseMountain;
 import com.gitHub.copiousDogs.render.mobs.RenderChihuahua;
 import com.gitHub.copiousDogs.render.mobs.RenderFrenchBulldog;
+import com.gitHub.copiousDogs.render.mobs.RenderGermanShepherd;
 import com.gitHub.copiousDogs.render.mobs.RenderGoldenRetriever;
 import com.gitHub.copiousDogs.render.mobs.RenderHusky;
 
@@ -35,5 +38,6 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(BerneseMountain.class, new RenderBerneseMountain(new ModelBerneseMountainDog(), 0.8f));
 		RenderingRegistry.registerEntityRenderingHandler(Chihuahua.class, new RenderChihuahua(new ModelChihuahua(), 0.2f));
 		RenderingRegistry.registerEntityRenderingHandler(FrenchBullDog.class, new RenderFrenchBulldog(new ModelFrenchBulldog(), 0.4f));
+		RenderingRegistry.registerEntityRenderingHandler(GermanShepherd.class, new RenderGermanShepherd(new ModelGermanShepherd(), 0.6f));
 	}
 }

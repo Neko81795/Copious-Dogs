@@ -23,6 +23,7 @@ import com.gitHub.copiousDogs.items.DogLeash;
 import com.gitHub.copiousDogs.mobs.BerneseMountain;
 import com.gitHub.copiousDogs.mobs.Chihuahua;
 import com.gitHub.copiousDogs.mobs.FrenchBullDog;
+import com.gitHub.copiousDogs.mobs.GermanShepherd;
 import com.gitHub.copiousDogs.mobs.GoldenRetriever;
 import com.gitHub.copiousDogs.mobs.Husky;
 
@@ -98,6 +99,7 @@ public class CopiousDogs
     	Reference.EGG_BERNESE_MOUNTAIN_ID = config.getItem("Egg Bernese Mountain:", 17006).getInt();
     	Reference.EGG_CHIHUAHUA_ID = config.getItem("Egg Chihuahua:", 17007).getInt();
     	Reference.EGG_FRENCH_BULLDOG_ID = config.getItem("Egg French Bulldog:", 17008).getInt();
+    	Reference.EGG_GERMAN_SHEPHERD_ID = config.getItem("Egg GermanShepherd", 17009).getInt();
     	
     	//reads the config file for block ids
     	Reference.DOG_DISH_ID = config.getBlock("Dog dish:", 1701).getInt();
@@ -175,6 +177,15 @@ public class CopiousDogs
     	EntityList.IDtoClassMapping.put(Reference.EGG_FRENCH_BULLDOG_ID, FrenchBullDog.class);
     	EntityList.entityEggs.put(Reference.EGG_FRENCH_BULLDOG_ID,
     			new EntityEggInfo(Reference.EGG_FRENCH_BULLDOG_ID, 0x151618 , 0xbdbdb7));
+    	//
+    	//GermanShepherd
+    	//
+    	EntityRegistry.registerModEntity(GermanShepherd.class, "German Shepherd", Reference.MOB_GERMAN_SHEPHERD_ID, this, 40, 1, true);
+    	EntityRegistry.addSpawn(GermanShepherd.class, 15, 2, 6, EnumCreatureType.creature, BiomeGenBase.plains);
+    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.German Shepherd.name", "German Shepherd");
+    	EntityList.IDtoClassMapping.put(Reference.EGG_GERMAN_SHEPHERD_ID, GermanShepherd.class);
+    	EntityList.entityEggs.put(Reference.EGG_GERMAN_SHEPHERD_ID,
+    			new EntityEggInfo(Reference.EGG_GERMAN_SHEPHERD_ID, 0xad754f , 0x17141b));
     	//
     	// Dog Dish
     	//
