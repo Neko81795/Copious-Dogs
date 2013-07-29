@@ -298,7 +298,7 @@ public class Dog extends EntityTameable
 			}
 		}
 
-		return false;
+		return super.interact(par1EntityPlayer);
 	}
 
 	@Override
