@@ -31,15 +31,17 @@ public class DogBiscuit extends ItemCopiousDogs
 			if (!dog.isTamed()) {
 				
 				par2EntityPlayer.swingItem();
-						
-				dog.setTameValue((byte)(dog.getTameValue() + dog.getRNG().nextInt(10)));
-						
-				dog.tryToTame(par2EntityPlayer);
 				
-				if (!par2EntityPlayer.capabilities.isCreativeMode) {
-					
+				if (!par2EntityPlayer.capabilities.isCreativeMode) 
+				{
+					dog.setTameValue((byte)(dog.getTameValue() + dog.getRNG().nextInt(10)));
+						
+					dog.tryToTame(par2EntityPlayer);
 					par1ItemStack.stackSize--;
 				}
+				else
+					dog.setTameValue((byte)11);
+					dog.tryToTame(par2EntityPlayer);
 						
 				return true;
 			}

@@ -112,7 +112,6 @@ public class CopiousDogs
 	@EventHandler
     public void load(FMLInitializationEvent event) 
     {
-    	proxy.registerRenderers();
     	//
     	//tab Copious dogs
     	//
@@ -203,9 +202,9 @@ public class CopiousDogs
     	GameRegistry.registerBlock(dogDish, DogDishItem.class, "dogDish");
     	GameRegistry.registerTileEntity(TileEntityDogDish.class, "dog_dish_entity");
     	LanguageRegistry.addName(dogDish, "Dog Dish");
-    	
-    	registerRecipes();
+
     	proxy.registerRenderers();
+    	registerRecipes();
     }
    
     public void registerRecipes() {
