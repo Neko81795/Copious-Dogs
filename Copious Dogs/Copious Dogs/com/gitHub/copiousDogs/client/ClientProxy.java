@@ -25,23 +25,31 @@ import com.gitHub.copiousDogs.render.mobs.RenderGoldenRetriever;
 import com.gitHub.copiousDogs.render.mobs.RenderHusky;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
-public class ClientProxy extends CommonProxy
-{
+
+public class ClientProxy extends CommonProxy {
 	@SuppressWarnings("unused")
 	private DogDishRenderer dogDishRenderer = new DogDishRenderer();
-	
+
 	@Override
-	public void registerRenderers()
-	{
-		//TODO uncomment when render issue is fixed
-		//CopiousDogs.dogDishRendererID = RenderingRegistry.getNextAvailableRenderId();
-		//RenderingRegistry.registerBlockHandler(CopiousDogs.dogDishRendererID, dogDishRenderer);
-		RenderingRegistry.registerEntityRenderingHandler(GoldenRetriever.class, new RenderGoldenRetriever(new ModelGoldenRetriever(), 0.6f));
-		RenderingRegistry.registerEntityRenderingHandler(Husky.class, new RenderHusky(new ModelHusky(), 0.6f));
-		RenderingRegistry.registerEntityRenderingHandler(BerneseMountain.class, new RenderBerneseMountain(new ModelBerneseMountainDog(), 0.8f));
-		RenderingRegistry.registerEntityRenderingHandler(Chihuahua.class, new RenderChihuahua(new ModelChihuahua(), 0.2f));
-		RenderingRegistry.registerEntityRenderingHandler(FrenchBullDog.class, new RenderFrenchBulldog(new ModelFrenchBulldog(), 0.4f));
-		RenderingRegistry.registerEntityRenderingHandler(GermanShepherd.class, new RenderGermanShepherd(new ModelGermanShepherd(), 0.6f));
-		RenderingRegistry.registerEntityRenderingHandler(Dalmatian.class, new RenderDalmatian(new ModelDalmatian(), 0.6f));
+	public void registerRenderers() {
+		// TODO uncomment when render issue is fixed
+		// CopiousDogs.dogDishRendererID =
+		// RenderingRegistry.getNextAvailableRenderId();
+		// RenderingRegistry.registerBlockHandler(CopiousDogs.dogDishRendererID,
+		// dogDishRenderer);
+		RenderingRegistry.registerEntityRenderingHandler(GoldenRetriever.class,
+				new RenderGoldenRetriever(new ModelGoldenRetriever(), 0.6f));
+		RenderingRegistry.registerEntityRenderingHandler(Husky.class,
+				new RenderHusky(new ModelHusky(), 0.6f));
+		RenderingRegistry.registerEntityRenderingHandler(BerneseMountain.class,
+				new RenderBerneseMountain(new ModelBerneseMountainDog(), 0.8f));
+		RenderingRegistry.registerEntityRenderingHandler(Chihuahua.class,
+				new RenderChihuahua(new ModelChihuahua(), 0.2f));
+		RenderingRegistry.registerEntityRenderingHandler(FrenchBullDog.class,
+				new RenderFrenchBulldog(new ModelFrenchBulldog(), 0.4f));
+		RenderingRegistry.registerEntityRenderingHandler(GermanShepherd.class,
+				new RenderGermanShepherd(new ModelGermanShepherd(), 0.6f));
+		RenderingRegistry.registerEntityRenderingHandler(Dalmatian.class,
+				new RenderDalmatian(new ModelDalmatian(), 0.6f));
 	}
 }

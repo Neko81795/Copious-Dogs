@@ -111,16 +111,6 @@ public class BlockDogDish extends BlockContainer {
     }
 	
 	@Override
-	public int onBlockPlaced(World par1World, int par2, int par3, int par4,
-			int par5, float par6, float par7, float par8, int par9) {
-		
-		par1World.setBlock(par2, par3, par4, blockID, par9, 2);
-		
-		return super.onBlockPlaced(par1World, par2, par3, par4, par5, par6, par7, par8,
-				par9);
-	}
-	
-	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3,
 			int par4, EntityPlayer entity, int par6, float par7,
 			float par8, float par9) {
