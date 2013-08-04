@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.item.ItemDye;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -14,6 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.opengl.GL11;
 
 import com.gitHub.copiousDogs.Reference;
+import com.gitHub.copiousDogs.items.DogCollar;
 import com.gitHub.copiousDogs.mobs.Dog;
 
 public class RenderDog extends RenderLiving {
@@ -153,6 +155,13 @@ public class RenderDog extends RenderLiving {
 	}
 	@Override
 	protected ResourceLocation func_110775_a(Entity entity) {
+		
+		Dog dog = (Dog) entity;
+		
+		if (dog.hasCollar()) {
+			
+			return new ResourceLocation("copiousDogs:textures/mobs/" + texture + "_collar_" + ItemDye.field_94595_b[dog.getCollarColor()] + ".png");
+		}
 		
 		return new ResourceLocation("copiousDogs:textures/mobs/" + texture + ".png");
 	}
