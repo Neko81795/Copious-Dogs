@@ -30,8 +30,10 @@ public class DogCollar extends ItemColored {
 			
 			Dog dog = (Dog) par3EntityLivingBase;
 			
-			if (dog.isTamed() && dog.getOwnerName() == par2EntityPlayer.getEntityName()) {
-				
+			System.out.println(dog.isTamed() + "   " + dog.getOwnerName() + "   " + par2EntityPlayer.getEntityName());
+			
+			if (dog.isTamed() && dog.getOwnerName().equalsIgnoreCase(par2EntityPlayer.getEntityName())) {
+								
 				par2EntityPlayer.swingItem();
 				
 				byte color = dog.getCollarColor();
