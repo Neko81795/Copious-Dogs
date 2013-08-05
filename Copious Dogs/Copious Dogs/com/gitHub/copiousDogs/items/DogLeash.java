@@ -19,7 +19,7 @@ public class DogLeash extends ItemCopiousDogs {
 	public boolean func_111207_a(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
 		
-		if (par3EntityLivingBase instanceof Dog) {
+		if (par3EntityLivingBase instanceof Dog && !par2EntityPlayer.worldObj.isRemote) {
 			
 			Dog dog = (Dog) par3EntityLivingBase;
 			

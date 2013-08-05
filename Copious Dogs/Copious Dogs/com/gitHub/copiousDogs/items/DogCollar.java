@@ -1,14 +1,12 @@
 package com.gitHub.copiousDogs.items;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
 
 import com.gitHub.copiousDogs.CopiousDogs;
 import com.gitHub.copiousDogs.mobs.Dog;
@@ -26,7 +24,7 @@ public class DogCollar extends ItemColored {
 	public boolean func_111207_a(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
 		
-		if (par3EntityLivingBase instanceof Dog) {
+		if (par3EntityLivingBase instanceof Dog && !par2EntityPlayer.worldObj.isRemote) {
 			
 			Dog dog = (Dog) par3EntityLivingBase;
 			
@@ -48,35 +46,16 @@ public class DogCollar extends ItemColored {
 					par1ItemStack.stackSize--;
 					
 					if (color > -1) {
+
+						Random rand = dog.getRNG();
+							
+						ItemStack collar = new ItemStack(CopiousDogs.dogCollar.itemID, 1, DogCollar.getItemFromDye(color));
+						EntityItem item = dog.entityDropItem(collar, 1F);
+						item.motionY += rand.nextFloat() * .5F;
+						item.motionX += (rand.nextFloat() - rand.nextFloat()) * .1F;
+						item.motionZ += (rand.nextFloat() - rand.nextFloat()) * .1F;
 						
-						ByteArrayOutputStream bos = new ByteArrayOutputStream(36);
-						DataOutputStream out = new DataOutputStream(bos);
-						
-						try {
-							
-							Random rand = dog.getRNG();
-							
-							ItemStack collar = new ItemStack(CopiousDogs.dogCollar.itemID, 1, DogCollar.getItemFromDye(color));
-							EntityItem item = dog.entityDropItem(collar, 1F);
-							item.motionY += rand.nextFloat() * .5F;
-							item.motionX += (rand.nextFloat() - rand.nextFloat()) * .1F;
-							item.motionZ += (rand.nextFloat() - rand.nextFloat()) * .1F;
-							
-							out.writeInt(0);
-							out.writeFloat((float) item.posX);
-							out.writeFloat((float) item.posY);
-							out.writeFloat((float) item.posZ);
-							out.writeFloat((float) item.motionX);
-							out.writeFloat((float) item.motionY);
-							out.writeFloat((float) item.motionZ);
-							out.writeInt(collar.itemID);
-							out.writeInt(1);
-							out.writeInt(collar.getItemDamage());
-							
-						}catch(IOException e) {
-							
-							System.out.println("Unable to send packet.");
-						}
+						par2EntityPlayer.worldObj.spawnEntityInWorld(item);
 					}
 				}
 				

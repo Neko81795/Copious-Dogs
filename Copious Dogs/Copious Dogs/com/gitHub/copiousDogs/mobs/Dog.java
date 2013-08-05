@@ -106,36 +106,17 @@ public class Dog extends EntityTameable
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		
-		if (hasCollar()) {
+		if (hasCollar() && !this.worldObj.isRemote) {
 			
-			ByteArrayOutputStream bos = new ByteArrayOutputStream(36);
-			DataOutputStream out = new DataOutputStream(bos);
+			Random rand = this.getRNG();
+				
+			ItemStack collar = new ItemStack(CopiousDogs.dogCollar.itemID, 1, DogCollar.getItemFromDye(getCollarColor()));
+			EntityItem item = this.entityDropItem(collar, 1F);
+			item.motionY += rand.nextFloat() * .5F;
+			item.motionX += (rand.nextFloat() - rand.nextFloat()) * .1F;
+			item.motionZ += (rand.nextFloat() - rand.nextFloat()) * .1F;
 			
-			try {
-				
-				Random rand = this.getRNG();
-				
-				ItemStack collar = new ItemStack(CopiousDogs.dogCollar.itemID, 1, DogCollar.getItemFromDye(getCollarColor()));
-				EntityItem item = this.entityDropItem(collar, 1F);
-				item.motionY += rand.nextFloat() * .5F;
-				item.motionX += (rand.nextFloat() - rand.nextFloat()) * .1F;
-				item.motionZ += (rand.nextFloat() - rand.nextFloat()) * .1F;
-				
-				out.writeInt(0);
-				out.writeFloat((float) item.posX);
-				out.writeFloat((float) item.posY);
-				out.writeFloat((float) item.posZ);
-				out.writeFloat((float) item.motionX);
-				out.writeFloat((float) item.motionY);
-				out.writeFloat((float) item.motionZ);
-				out.writeInt(collar.itemID);
-				out.writeInt(1);
-				out.writeInt(collar.getItemDamage());
-				
-			}catch(IOException e) {
-				
-				System.out.println("Unable to send packet.");
-			}
+			this.worldObj.spawnEntityInWorld(item);
 		}
 	}
 	
@@ -286,15 +267,18 @@ public class Dog extends EntityTameable
 	public boolean interact(EntityPlayer par1EntityPlayer) 
 	{
 		
-		if (par1EntityPlayer.getCurrentEquippedItem() == null) {
-			if (isSitting()) {	
-				this.setSitting(false);
-				return true;
-			}
-			else {
+		if (this.worldObj.isRemote) {
 			
-				setSitting(true);
-				return true;
+			if (par1EntityPlayer.getCurrentEquippedItem() == null) {
+				if (isSitting()) {	
+					this.setSitting(false);
+					return true;
+				}
+				else {
+			
+					setSitting(true);
+					return true;
+				}
 			}
 		}
 
