@@ -37,8 +37,8 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "CopiousDogs", name = "Copious Dogs", version = "0.0.0.0")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, versionBounds = "[0.0.0.0]",
+@Mod(modid = "CopiousDogs", name = "Copious Dogs", version = Reference.VERSION)
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, versionBounds = "[" + Reference.VERSION + "]",
 		channels = {Reference.CHANNEL_NAME}, packetHandler = PacketHandler.class)
 public class CopiousDogs
 {

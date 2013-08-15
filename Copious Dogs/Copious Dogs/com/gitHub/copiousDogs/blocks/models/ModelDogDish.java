@@ -26,8 +26,8 @@ public class ModelDogDish extends ModelBase
   
   public ModelDogDish()
   {
-    textureWidth = 32;
-    textureHeight = 32;
+	  //textureWidth = 32;
+	  //textureHeight = 32;
     
       Shape1 = new ModelRenderer(this, 0, 0);
       Shape1.addBox(0F, 0F, 0F, 6, 1, 6);
