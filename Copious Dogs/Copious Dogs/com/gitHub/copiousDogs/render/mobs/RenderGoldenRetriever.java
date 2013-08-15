@@ -16,7 +16,6 @@ public class RenderGoldenRetriever extends RenderDog
 	public RenderGoldenRetriever(ModelBase par1ModelBase, float shadowSize)
 	{
 		super(par1ModelBase, shadowSize, "goldenretrievertexture");
-		// TODO Auto-generated constructor stub
 	}
 
 	public void renderTutorial(GoldenRetriever entity, double par2, double par4, double par6, float par8, float par9)

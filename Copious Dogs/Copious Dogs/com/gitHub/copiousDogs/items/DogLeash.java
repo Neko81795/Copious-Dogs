@@ -36,8 +36,6 @@ public class DogLeash extends ItemCopiousDogs {
 					dog.setLeashed(false);
 				}
 				
-				System.out.println(dog.isLeashed());
-				
 				return true;
 			}
 		}

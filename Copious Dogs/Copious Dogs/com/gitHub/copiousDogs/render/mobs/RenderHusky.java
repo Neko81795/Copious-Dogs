@@ -13,7 +13,6 @@ public class RenderHusky extends RenderDog
 	public RenderHusky(ModelBase par1ModelBase, float shadowSize)
 	{
 		super(par1ModelBase, shadowSize, "huskytexture");
-		// TODO Auto-generated constructor stub
 	}
 
 	public void renderTutorial(Husky entity, double par2, double par4, double par6, float par8, float par9)

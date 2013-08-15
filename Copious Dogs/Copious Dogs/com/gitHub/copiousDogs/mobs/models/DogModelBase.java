@@ -45,6 +45,7 @@ public abstract class DogModelBase extends ModelBase
 		this.Leg2.rotateAngleX = MathHelper.cos(walkTime * 0.6662F + (float) Math.PI) * 1.4F * isWalking;
 		this.Leg3.rotateAngleX = MathHelper.cos(walkTime * 0.6662F + (float) Math.PI) * 1.4F * isWalking;
 		this.Leg4.rotateAngleX = MathHelper.cos(walkTime * 0.6662F) * 1.4F * isWalking;
+		
 		super.setLivingAnimations(entity, walkTime, isWalking, random);
 	}
 	

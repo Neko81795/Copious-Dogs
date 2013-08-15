@@ -12,7 +12,6 @@ public class RenderFrenchBulldog extends RenderDog
 	public RenderFrenchBulldog(ModelBase par1ModelBase, float par2)
 	{
 		super(par1ModelBase, par2, "frenchbulldogtexture");
-		// TODO Auto-generated constructor stub
 	}
 
 	public void renderTutorial(FrenchBullDog entity, double par2, double par4, double par6, float par8, float par9)

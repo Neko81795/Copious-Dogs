@@ -1,6 +1,7 @@
 package com.gitHub.copiousDogs.client;
 
 import com.gitHub.copiousDogs.CommonProxy;
+import com.gitHub.copiousDogs.CopiousDogs;
 import com.gitHub.copiousDogs.mobs.BerneseMountain;
 import com.gitHub.copiousDogs.mobs.Chihuahua;
 import com.gitHub.copiousDogs.mobs.Dalmatian;
@@ -32,11 +33,11 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerRenderers() {
-		// TODO uncomment when render issue is fixed
-		// CopiousDogs.dogDishRendererID =
-		// RenderingRegistry.getNextAvailableRenderId();
-		// RenderingRegistry.registerBlockHandler(CopiousDogs.dogDishRendererID,
-		// dogDishRenderer);
+		//TODO uncomment when render issue is fixed
+		/*CopiousDogs.dogDishRendererID =
+		RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(CopiousDogs.dogDishRendererID,
+		dogDishRenderer);*/
 		RenderingRegistry.registerEntityRenderingHandler(GoldenRetriever.class,
 				new RenderGoldenRetriever(new ModelGoldenRetriever(), 0.6f));
 		RenderingRegistry.registerEntityRenderingHandler(Husky.class,

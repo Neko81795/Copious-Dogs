@@ -1,8 +1,5 @@
 package com.gitHub.copiousDogs.mobs;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.Random;
 
@@ -17,6 +14,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -27,6 +25,8 @@ import com.gitHub.copiousDogs.items.DogCollar;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIBegBiscuit;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIEatDogDish;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIFollowOwnerLeashed;
+import com.gitHub.copiousDogs.mobs.ai.EntityAILieDown;
+import com.gitHub.copiousDogs.mobs.ai.EntityAIMateNearTorch;
 
 public class Dog extends EntityTameable
 {
@@ -195,14 +195,19 @@ public class Dog extends EntityTameable
 		this.moveSpeed = moveSpeed;
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, this.aiSit);
-		this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.4F));
-		this.tasks.addTask(3, new EntityAIAttackOnCollide(this, .75F, true));
-		this.tasks.addTask(4, new EntityAIEatDogDish(this, 20F));
+		
+		//TODO make this work
+		//this.tasks.addTask(1, new EntityAILieDown(this));
+		//
+		
+		this.tasks.addTask(2, new EntityAIMateNearTorch(this, 0.4F, 10F));
+		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
+		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, .75F, true));
+		this.tasks.addTask(5, new EntityAIEatDogDish(this, 20F));
 		this.tasks.addTask(6, new EntityAIFollowOwnerLeashed(this, moveSpeed, 5.0F, 2.0F));
 		this.tasks.addTask(7, new EntityAIWander(this, moveSpeed));
 		this.tasks.addTask(8, new EntityAIBegBiscuit(this, 2F));
-    	this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+    	this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 0F));
     	this.tasks.addTask(9, new EntityAILookIdle(this));
     	
     	this.setEntityHealth(getMaxHealth());
@@ -269,8 +274,27 @@ public class Dog extends EntityTameable
 		
 		if (this.worldObj.isRemote) {
 			
-			if (par1EntityPlayer.getCurrentEquippedItem() == null) {
-				if (isSitting()) {	
+			ItemStack stack = par1EntityPlayer.getCurrentEquippedItem();
+			
+			if (stack != null && this.isBreedingItem(stack) && this.getGrowingAge() == 0 && this.inLove <= 0 && this.isTamed()
+					&& this.getOwnerName().equalsIgnoreCase(par1EntityPlayer.getEntityName()))
+	        {
+	            if (!par1EntityPlayer.capabilities.isCreativeMode)
+	            {
+	                --stack.stackSize;
+
+	                if (stack.stackSize <= 0)
+	                {
+	                    par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
+	                }
+	            }
+
+	            this.func_110196_bT();
+	            return true;
+	        }
+			
+			if (stack == null) {
+				if (isSitting()) {
 					this.setSitting(false);
 					return true;
 				}
@@ -281,8 +305,14 @@ public class Dog extends EntityTameable
 				}
 			}
 		}
+		
+		return false;
+	}
+	
+	@Override
+	public boolean isBreedingItem(ItemStack par1ItemStack) {
 
-		return super.interact(par1EntityPlayer);
+		return par1ItemStack.itemID == Item.cookie.itemID;
 	}
 
 	@Override

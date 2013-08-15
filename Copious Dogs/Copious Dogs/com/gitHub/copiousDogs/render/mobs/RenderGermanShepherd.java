@@ -12,7 +12,6 @@ public class RenderGermanShepherd extends RenderDog
 	public RenderGermanShepherd(ModelBase par1ModelBase, float shadowSize)
 	{
 		super(par1ModelBase, shadowSize, "germanshepherdtexture");
-		// TODO Auto-generated constructor stub
 	}
 
 	public void renderTutorial(GermanShepherd entity, double par2, double par4, double par6, float par8, float par9)
