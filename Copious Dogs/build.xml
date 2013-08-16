@@ -1,12 +1,11 @@
 <project name="Copious Dogs" default="build">
 
     <property file="build.properties" prefix="build"/>
+    <property file="mod.properties"/>
     
 	<property name="dir.mcp" location="${build.dir.mcp}" relative="false"/>
 	<property name="dir.source" location="${build.dir.source}" relative="false"/>
 	<property name="dir.release" location="${build.dir.release}" relative="false"/>
-	<property name="mod.version" value="${build.mod.version}"/>
-	<property name="minecraft.version" value="${build.minecraft.version}"/>
 	
 	<target name="clean">
 		<delete dir="${dir.mcp}/src/minecraft/com/gitHub" />
@@ -41,6 +40,31 @@
 		</exec>
 	</target>
 
+	<target name="build_jar">
+        
+	    <copy todir="${dir.mcp}/reobf/minecraft" >
+            <fileset file="${dir.source}/Copious Dogs/mcmod.info" />
+        </copy>
+        
+        <replace file="${dir.mcp}/reobf/minecraft/mcmod.info" token="@VERSION@" value="${mod.version}" />
+        <replace file="${dir.mcp}/reobf/minecraft/mcmod.info" token="@MODID@" value="${mod.id}" />
+        <replace file="${dir.mcp}/reobf/minecraft/mcmod.info" token="@MODNAME@" value="${mod.name}" />
+        <replace file="${dir.mcp}/reobf/minecraft/mcmod.info" token="@DESCRIPTION@" value="${mod.description}" />
+        <replace file="${dir.mcp}/reobf/minecraft/mcmod.info" token="@MCVERSION@" value="${minecraft.version}" />
+        <replace file="${dir.mcp}/reobf/minecraft/mcmod.info" token="@AUTHORS@" value="${mod.authors}" />
+        <replace file="${dir.mcp}/reobf/minecraft/mcmod.info" token="@CREDITS@" value="${mod.credits}" />
+        <replace file="${dir.mcp}/reobf/minecraft/mcmod.info" token="@URL@" value="${mod.url}" />
+        <replace file="${dir.mcp}/reobf/minecraft/mcmod.info" token="@LOGOFILE@" value="${mod.logoFile}" />
+	    
+        <mkdir dir="${dir.release}/${minecraft.version}/${mod.version}" />
+        <jar destfile="${dir.release}/${minecraft.version}/${mod.version}/copious-dogs-${mod.version}.jar">
+            <fileset dir="${dir.mcp}/reobf/minecraft/"/>
+            <fileset file="${dir.mcp}/reobf/minecraft/mcmod.info" />
+            <fileset dir="${dir.source}/Copious Dogs/resources" />
+        </jar>
+	    
+	</target>
+	
 	<target name="build">
 	
 		<echo message= "${dir.mcp}" />
@@ -50,13 +74,9 @@
 		<antcall target="replace_tokens" />
 		<antcall target="recompile" />
 		<antcall target="reobfuscate" />
-		
-		<mkdir dir="${dir.release}/${minecraft.version}/${mod.version}" />
-		<jar destfile="${dir.release}/${minecraft.version}/${mod.version}/copious-dogs-${mod.version}.jar">
-			<fileset dir="${dir.mcp}/reobf/minecraft" />
-			<fileset dir="${dir.source}/Copious Dogs/resources" />
-		</jar>
 			
+		<antcall target="build_jar" />
+		
 		<antcall target="clean" />
 	</target>
 </project>

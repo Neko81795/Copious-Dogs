@@ -1,0 +1,20 @@
+[
+{
+    "modid": "@MODID@",
+    "name": "@MODNAME@",
+    "description": "@DESCRIPTION@",
+    "version": "@VERSION@",
+    "mcversion": "@MCVERSION@",
+    "url": "@URL@",
+    "updateUrl":"",
+    "authors": [ @AUTHORS@ ],
+    "credits": "@CREDITS@",
+    "logoFile": "@LOGOFILE@",
+    "screenshots": [],
+    "parent":,
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "useDependencyInformation": "false"
+}
+]
