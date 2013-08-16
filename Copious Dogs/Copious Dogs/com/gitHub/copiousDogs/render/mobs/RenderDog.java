@@ -86,14 +86,13 @@ public class RenderDog extends RenderLiving {
         	
         	Dog dog = (Dog) par1EntityLivingBase;
         	
-        	if (dog.isTamed()) renderTag(dog.func_110143_aJ() + "/" + dog.getMaxHealth(), par1EntityLivingBase, par2, par4, par6, -.25F);
-        	
         	if (Reference.DEBUG) {
         		
         		renderTag("Is eating:" + dog.isEating(), par1EntityLivingBase, par2, par4, par6, .25F);
         		renderTag("Is leashed:" + dog.isLeashed(), par1EntityLivingBase, par2, par4, par6, .5F);
         		renderTag("Is tamed:" + dog.isTamed(), par1EntityLivingBase, par2, par4, par6, .75F);
         		if (dog.isTamed())renderTag("Owner:" + dog.getOwnerName(), par1EntityLivingBase, par2, par4, par6, 1F);
+        		renderTag(dog.func_110143_aJ() + "/" + dog.getMaxHealth(), par1EntityLivingBase, par2, par4, par6, -.25F);
         	}
         }
 	}
