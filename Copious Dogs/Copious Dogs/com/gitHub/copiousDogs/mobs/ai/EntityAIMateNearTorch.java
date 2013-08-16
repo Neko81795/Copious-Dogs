@@ -8,8 +8,9 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.entity.passive.Dog;
 import net.minecraft.world.World;
+
+import com.gitHub.copiousDogs.mobs.Dog;
 
 public class EntityAIMateNearTorch extends EntityAIBase {
 	
