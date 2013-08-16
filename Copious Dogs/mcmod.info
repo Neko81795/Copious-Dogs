@@ -1,20 +1,19 @@
 [
 {
-    "modid": "@MODID@",
-    "name": "@MODNAME@",
-    "description": "@DESCRIPTION@",
-    "version": "@VERSION@",
-    "mcversion": "@MCVERSION@",
-    "url": "@URL@",
-    "updateUrl":"",
-    "authors": [ @AUTHORS@ ],
-    "credits": "@CREDITS@",
-    "logoFile": "@LOGOFILE@",
-    "screenshots": [],
-    "parent":,
-    "requiredMods": [],
-    "dependencies": [],
-    "dependants": [],
-    "useDependencyInformation": "false"
+  "modid": "@MODID@",
+  "name": "@MODNAME@",
+  "version": "@VERSION@",
+  "mcversion": "",
+  "description": "@DESCRIPTION@",
+  "credits": "@CREDITS@",
+  "logoFile": "@LOGOFILE@",
+  "url": "@URL@",
+  "updateUrl": "",
+  "authors": [ "Dramentiaras", "Neko81795", "Cryztal", "wolfpupKG52" ],
+  "parent":"",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
 }
 ]

@@ -181,21 +181,7 @@ public class CopiousDogs
     	EntityList.IDtoClassMapping.put(Reference.EGG_DALMATIAN_ID, Dalmatian.class);
     	EntityList.entityEggs.put(Reference.EGG_DALMATIAN_ID,
     			new EntityEggInfo(Reference.EGG_DALMATIAN_ID, 0xFFFFFF , 0x000000));
-    	//
-    	// Dog Dish
-    	//
-    	dogDish = new BlockDogDish(Reference.DOG_DISH_ID);
-    	GameRegistry.registerBlock(dogDish, DogDishItem.class, "dogDish");
-    	GameRegistry.registerTileEntity(TileEntityDogDish.class, "dog_dish_entity");
-    	LanguageRegistry.addName(dogDish, "Dog Dish");
-
-    	proxy.registerRenderers();
-    	registerRecipes();
-    }
-    
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event) 
-    {
+    	
     	//TODO If we should support extra biomes XL
     	
     	/*if (Loader.isModLoaded("ExtrabiomesXL")) {
@@ -221,6 +207,22 @@ public class CopiousDogs
 	    			BiomeGenBase.taigaHills, BiomeGenBase.iceMountains);
 	    	EntityRegistry.addSpawn(GoldenRetriever.class, 15, 2, 6, EnumCreatureType.creature, BiomeGenBase.plains);
     	//}
+    	
+    	//
+    	// Dog Dish
+    	//
+    	dogDish = new BlockDogDish(Reference.DOG_DISH_ID);
+    	GameRegistry.registerBlock(dogDish, DogDishItem.class, "dogDish");
+    	GameRegistry.registerTileEntity(TileEntityDogDish.class, "dog_dish_entity");
+    	LanguageRegistry.addName(dogDish, "Dog Dish");
+
+    	proxy.registerRenderers();
+    	registerRecipes();
+    }
+    
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) 
+    {
     }
     
     public void registerRecipes() {
