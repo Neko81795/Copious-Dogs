@@ -14,9 +14,9 @@ import com.gitHub.copiousDogs.mobs.Dog;
 
 public class EntityAIMateNearTorch extends EntityAIBase {
 	
-	private Dog theAnimal;
-    World theWorld;
-    private Dog targetMate;
+	private Dog dog;
+    private World theWorld;
+    private Dog dog1;
     private float radius;
 
     /**
@@ -29,7 +29,7 @@ public class EntityAIMateNearTorch extends EntityAIBase {
 
     public EntityAIMateNearTorch(Dog par1EntityAnimal, double par2, float par3)
     {
-        this.theAnimal = par1EntityAnimal;
+        this.dog = par1EntityAnimal;
         this.theWorld = par1EntityAnimal.worldObj;
         this.moveSpeed = par2;
         this.setMutexBits(3);
@@ -41,14 +41,17 @@ public class EntityAIMateNearTorch extends EntityAIBase {
      */
     public boolean shouldExecute()
     {
-        if (!this.theAnimal.isInLove())
+    	
+        if (!this.dog.isInLove())
         {
             return false;
         }
         else
         {
-            this.targetMate = this.getNearbyMate();
-            return this.targetMate != null && isNearHeat();
+        	
+            this.dog1 = this.getNearbyMate();
+            System.out.println(dog1);
+            return this.dog1 != null && isNearHeat();
         }
     }
 
@@ -57,8 +60,8 @@ public class EntityAIMateNearTorch extends EntityAIBase {
     	for (int x = 0; x < radius * 2; x++) {
 			for (int y = 0; y < radius * 2; y++) {
 				for (int z = 0; z < radius * 2; z++) {
-					if (theWorld.getBlockId((int)(theAnimal.posX + x - radius), (int)(theAnimal.posY + y - radius), (int)(theAnimal.posZ + z - radius)) == Block.fire.blockID ||
-							theWorld.getBlockId((int)(theAnimal.posX + x - radius), (int)(theAnimal.posY + y - radius), (int)(theAnimal.posZ + z - radius)) == Block.torchWood.blockID) {
+					if (theWorld.getBlockId((int)(dog.posX + x - radius), (int)(dog.posY + y - radius), (int)(dog.posZ + z - radius)) == Block.fire.blockID ||
+							theWorld.getBlockId((int)(dog.posX + x - radius), (int)(dog.posY + y - radius), (int)(dog.posZ + z - radius)) == Block.torchWood.blockID) {
 						
 						return true;
 					}
@@ -74,7 +77,7 @@ public class EntityAIMateNearTorch extends EntityAIBase {
      */
     public boolean continueExecuting()
     {
-        return this.targetMate.isEntityAlive() && this.targetMate.isInLove() && this.spawnBabyDelay < 60;
+        return this.dog1.isEntityAlive() && this.dog1.isInLove() && this.spawnBabyDelay < 60;
     }
 
     /**
@@ -82,7 +85,7 @@ public class EntityAIMateNearTorch extends EntityAIBase {
      */
     public void resetTask()
     {
-        this.targetMate = null;
+        this.dog1 = null;
         this.spawnBabyDelay = 0;
     }
 
@@ -92,11 +95,11 @@ public class EntityAIMateNearTorch extends EntityAIBase {
     public void updateTask()
     {
     	
-        this.theAnimal.getLookHelper().setLookPositionWithEntity(this.targetMate, 10.0F, (float)this.theAnimal.getVerticalFaceSpeed());
-        this.theAnimal.getNavigator().tryMoveToEntityLiving(this.targetMate, this.moveSpeed);
+        this.dog.getLookHelper().setLookPositionWithEntity(this.dog1, 10.0F, (float)this.dog.getVerticalFaceSpeed());
+        this.dog.getNavigator().tryMoveToEntityLiving(this.dog1, this.moveSpeed);
         ++this.spawnBabyDelay;
 
-        if (this.spawnBabyDelay >= 60 && this.theAnimal.getDistanceSqToEntity(this.targetMate) < 9.0D)
+        if (this.spawnBabyDelay >= 60 && this.dog.getDistanceSqToEntity(this.dog1) < 9.0D)
         {
             this.spawnBaby();
         }
@@ -108,8 +111,8 @@ public class EntityAIMateNearTorch extends EntityAIBase {
      */
     private Dog getNearbyMate()
     {
-        float f = 8.0F;
-        List list = this.theWorld.getEntitiesWithinAABB(this.theAnimal.getClass(), this.theAnimal.boundingBox.expand((double)f, (double)f, (double)f));
+        float f = 15F;
+        List list = this.theWorld.getEntitiesWithinAABB(this.dog.getClass(), this.dog.boundingBox.expand((double)f, (double)f, (double)f));
         double d0 = Double.MAX_VALUE;
         Dog entityanimal = null;
         Iterator iterator = list.iterator();
@@ -118,10 +121,10 @@ public class EntityAIMateNearTorch extends EntityAIBase {
         {
             Dog entityanimal1 = (Dog)iterator.next();
 
-            if (this.theAnimal.canMateWith(entityanimal1) && this.theAnimal.getDistanceSqToEntity(entityanimal1) < d0)
+            if (this.dog.canMateWith(entityanimal1) && this.dog.getDistanceSqToEntity(entityanimal1) < d0)
             {
                 entityanimal = entityanimal1;
-                d0 = this.theAnimal.getDistanceSqToEntity(entityanimal1);
+                d0 = this.dog.getDistanceSqToEntity(entityanimal1);
             }
         }
 
@@ -133,28 +136,28 @@ public class EntityAIMateNearTorch extends EntityAIBase {
      */
     private void spawnBaby()
     {
-        EntityAgeable entityageable = this.theAnimal.createChild(this.targetMate);
+        EntityAgeable entityageable = this.dog.createChild(this.dog1);
 
         if (entityageable != null)
         {
-            this.theAnimal.setGrowingAge(6000);
-            this.targetMate.setGrowingAge(6000);
-            this.theAnimal.resetInLove();
-            this.targetMate.resetInLove();
+            this.dog.setGrowingAge(6000);
+            this.dog1.setGrowingAge(6000);
+            this.dog.resetInLove();
+            this.dog1.resetInLove();
             entityageable.setGrowingAge(-24000);
-            entityageable.setLocationAndAngles(this.theAnimal.posX, this.theAnimal.posY, this.theAnimal.posZ, 0.0F, 0.0F);
+            entityageable.setLocationAndAngles(this.dog.posX, this.dog.posY, this.dog.posZ, 0.0F, 0.0F);
             this.theWorld.spawnEntityInWorld(entityageable);
-            Random random = this.theAnimal.getRNG();
+            Random random = this.dog.getRNG();
 
             for (int i = 0; i < 7; ++i)
             {
                 double d0 = random.nextGaussian() * 0.02D;
                 double d1 = random.nextGaussian() * 0.02D;
                 double d2 = random.nextGaussian() * 0.02D;
-                this.theWorld.spawnParticle("heart", this.theAnimal.posX + (double)(random.nextFloat() * this.theAnimal.width * 2.0F) - (double)this.theAnimal.width, this.theAnimal.posY + 0.5D + (double)(random.nextFloat() * this.theAnimal.height), this.theAnimal.posZ + (double)(random.nextFloat() * this.theAnimal.width * 2.0F) - (double)this.theAnimal.width, d0, d1, d2);
+                this.theWorld.spawnParticle("heart", this.dog.posX + (double)(random.nextFloat() * this.dog.width * 2.0F) - (double)this.dog.width, this.dog.posY + 0.5D + (double)(random.nextFloat() * this.dog.height), this.dog.posZ + (double)(random.nextFloat() * this.dog.width * 2.0F) - (double)this.dog.width, d0, d1, d2);
             }
 
-            this.theWorld.spawnEntityInWorld(new EntityXPOrb(this.theWorld, this.theAnimal.posX, this.theAnimal.posY, this.theAnimal.posZ, random.nextInt(7) + 1));
+            this.theWorld.spawnEntityInWorld(new EntityXPOrb(this.theWorld, this.dog.posX, this.dog.posY, this.dog.posZ, random.nextInt(7) + 1));
         }
     }
 }

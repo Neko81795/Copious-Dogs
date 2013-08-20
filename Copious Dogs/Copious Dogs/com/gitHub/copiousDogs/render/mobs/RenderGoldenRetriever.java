@@ -13,9 +13,9 @@ import com.gitHub.copiousDogs.mobs.GoldenRetriever;
 public class RenderGoldenRetriever extends RenderDog
 {
 
-	public RenderGoldenRetriever(ModelBase par1ModelBase, float shadowSize)
+	public RenderGoldenRetriever(ModelBase par1ModelBase, ModelBase par2ModelBase, float shadowSize)
 	{
-		super(par1ModelBase, shadowSize, "goldenretrievertexture");
+		super(par1ModelBase, par2ModelBase, shadowSize, "goldenretrievertexture");
 	}
 
 	public void renderTutorial(GoldenRetriever entity, double par2, double par4, double par6, float par8, float par9)

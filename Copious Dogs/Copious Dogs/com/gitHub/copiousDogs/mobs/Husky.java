@@ -11,7 +11,7 @@ public class Husky extends Dog
 
 	public Husky(World world)
 	{
-		super(world, .5F);
+		super(world, .5F, "husky");
 		this.setSize(0.4f, 1);
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));

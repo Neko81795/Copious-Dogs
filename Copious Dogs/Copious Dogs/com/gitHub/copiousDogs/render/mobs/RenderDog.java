@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.item.ItemDye;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -20,12 +19,32 @@ import com.gitHub.copiousDogs.mobs.Dog;
 
 public class RenderDog extends RenderLiving {
 
-	String texture;
+	ResourceLocation texture;
+	ResourceLocation collarTexture;
 	
-	public RenderDog(ModelBase par1ModelBase, float par2, String texture) {
+	public RenderDog(ModelBase par1ModelBase, ModelBase par2ModelBase, float par2, String texture) {
 		super(par1ModelBase, par2);
-		this.texture = texture;
+		this.setRenderPassModel(par2ModelBase);
+		this.texture = new ResourceLocation("copiousDogs:textures/mobs/" + texture + ".png");
+		this.collarTexture = new ResourceLocation("copiousDogs:textures/mobs/" + texture + "_collar.png");
 	}
+	
+	protected int func_82447_a(Dog par1Dog, int par2, float par3)
+    {
+        float f1;
+        if (par2 == 1 && par1Dog.isTamed() && par1Dog.hasCollar())
+        {
+            this.func_110776_a(collarTexture);
+            f1 = 1.0F;
+            int j = DogCollar.getItemFromDye(par1Dog.getCollarColor());      
+            GL11.glColor3f(f1 * EntitySheep.fleeceColorTable[j][0], f1 * EntitySheep.fleeceColorTable[j][1], f1 * EntitySheep.fleeceColorTable[j][2]);
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
 	
 	@Override
 	protected void passSpecialRender(EntityLivingBase par1EntityLivingBase,
@@ -92,6 +111,8 @@ public class RenderDog extends RenderLiving {
         		renderTag("Is leashed:" + dog.isLeashed(), par1EntityLivingBase, par2, par4, par6, .5F);
         		renderTag("Is tamed:" + dog.isTamed(), par1EntityLivingBase, par2, par4, par6, .75F);
         		if (dog.isTamed())renderTag("Owner:" + dog.getOwnerName(), par1EntityLivingBase, par2, par4, par6, 1F);
+        		renderTag("Is in love:" + dog.isInLove(), par1EntityLivingBase, par2, par4, par6, 1.25F);
+        		renderTag("In love:" + dog.inLove, par1EntityLivingBase, par2, par4, par6, 1.5F);
         		renderTag(dog.func_110143_aJ() + "/" + dog.getMaxHealth(), par1EntityLivingBase, par2, par4, par6, -.25F);
         	}
         }
@@ -152,17 +173,17 @@ public class RenderDog extends RenderLiving {
         }
         MinecraftForge.EVENT_BUS.post(new RenderLivingEvent.Specials.Post(par1EntityLivingBase, this));
 	}
+	
+	@Override
+	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
+    {
+        return this.func_82447_a((Dog)par1EntityLivingBase, par2, par3);
+    }
+	
 	@Override
 	protected ResourceLocation func_110775_a(Entity entity) {
 		
-		Dog dog = (Dog) entity;
-		
-		if (dog.hasCollar()) {
-			
-			return new ResourceLocation("copiousDogs:textures/mobs/" + texture + "_collar_" + ItemDye.field_94595_b[dog.getCollarColor()] + ".png");
-		}
-		
-		return new ResourceLocation("copiousDogs:textures/mobs/" + texture + ".png");
+		return texture;
 	}
 
 }

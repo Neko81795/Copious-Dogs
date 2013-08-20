@@ -1,7 +1,7 @@
 package com.gitHub.copiousDogs.client;
 
 import com.gitHub.copiousDogs.CommonProxy;
-import com.gitHub.copiousDogs.CopiousDogs;
+import com.gitHub.copiousDogs.mobs.Beagle;
 import com.gitHub.copiousDogs.mobs.BerneseMountain;
 import com.gitHub.copiousDogs.mobs.Chihuahua;
 import com.gitHub.copiousDogs.mobs.Dalmatian;
@@ -9,6 +9,7 @@ import com.gitHub.copiousDogs.mobs.FrenchBullDog;
 import com.gitHub.copiousDogs.mobs.GermanShepherd;
 import com.gitHub.copiousDogs.mobs.GoldenRetriever;
 import com.gitHub.copiousDogs.mobs.Husky;
+import com.gitHub.copiousDogs.mobs.models.ModelBeagle;
 import com.gitHub.copiousDogs.mobs.models.ModelBerneseMountainDog;
 import com.gitHub.copiousDogs.mobs.models.ModelChihuahua;
 import com.gitHub.copiousDogs.mobs.models.ModelDalmatian;
@@ -17,6 +18,7 @@ import com.gitHub.copiousDogs.mobs.models.ModelGermanShepherd;
 import com.gitHub.copiousDogs.mobs.models.ModelGoldenRetriever;
 import com.gitHub.copiousDogs.mobs.models.ModelHusky;
 import com.gitHub.copiousDogs.render.blocks.DogDishRenderer;
+import com.gitHub.copiousDogs.render.mobs.RenderBeagle;
 import com.gitHub.copiousDogs.render.mobs.RenderBerneseMountain;
 import com.gitHub.copiousDogs.render.mobs.RenderChihuahua;
 import com.gitHub.copiousDogs.render.mobs.RenderDalmatian;
@@ -39,18 +41,20 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(CopiousDogs.dogDishRendererID,
 		dogDishRenderer);*/
 		RenderingRegistry.registerEntityRenderingHandler(GoldenRetriever.class,
-				new RenderGoldenRetriever(new ModelGoldenRetriever(), 0.6f));
+				new RenderGoldenRetriever(new ModelGoldenRetriever(), new ModelGoldenRetriever(), 0.6f));
 		RenderingRegistry.registerEntityRenderingHandler(Husky.class,
-				new RenderHusky(new ModelHusky(), 0.6f));
+				new RenderHusky(new ModelHusky(), new ModelHusky(), 0.6f));
 		RenderingRegistry.registerEntityRenderingHandler(BerneseMountain.class,
-				new RenderBerneseMountain(new ModelBerneseMountainDog(), 0.8f));
+				new RenderBerneseMountain(new ModelBerneseMountainDog(), new ModelBerneseMountainDog(), 0.8f));
 		RenderingRegistry.registerEntityRenderingHandler(Chihuahua.class,
-				new RenderChihuahua(new ModelChihuahua(), 0.2f));
+				new RenderChihuahua(new ModelChihuahua(), new ModelChihuahua(), 0.2f));
 		RenderingRegistry.registerEntityRenderingHandler(FrenchBullDog.class,
-				new RenderFrenchBulldog(new ModelFrenchBulldog(), 0.4f));
+				new RenderFrenchBulldog(new ModelFrenchBulldog(), new ModelFrenchBulldog(), 0.4f));
 		RenderingRegistry.registerEntityRenderingHandler(GermanShepherd.class,
-				new RenderGermanShepherd(new ModelGermanShepherd(), 0.6f));
+				new RenderGermanShepherd(new ModelGermanShepherd(), new ModelGermanShepherd(), 0.6f));
 		RenderingRegistry.registerEntityRenderingHandler(Dalmatian.class,
-				new RenderDalmatian(new ModelDalmatian(), 0.6f));
+				new RenderDalmatian(new ModelDalmatian(), new ModelDalmatian(), 0.6f));
+		RenderingRegistry.registerEntityRenderingHandler(Beagle.class, 
+				new RenderBeagle(new ModelBeagle(), new ModelBeagle(), 0.6F));
 	}
 }

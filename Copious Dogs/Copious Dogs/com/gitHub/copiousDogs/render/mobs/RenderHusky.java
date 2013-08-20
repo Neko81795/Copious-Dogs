@@ -10,9 +10,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderHusky extends RenderDog
 {
-	public RenderHusky(ModelBase par1ModelBase, float shadowSize)
+	public RenderHusky(ModelBase par1ModelBase, ModelBase par2ModelBase, float shadowSize)
 	{
-		super(par1ModelBase, shadowSize, "huskytexture");
+		super(par1ModelBase, par2ModelBase, shadowSize, "huskytexture");
 	}
 
 	public void renderTutorial(Husky entity, double par2, double par4, double par6, float par8, float par9)

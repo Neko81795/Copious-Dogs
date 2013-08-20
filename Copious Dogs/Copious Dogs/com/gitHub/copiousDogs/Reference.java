@@ -23,6 +23,7 @@ public class Reference
 	public static int EGG_FRENCH_BULLDOG_ID;
 	public static int EGG_GERMAN_SHEPHERD_ID;
 	public static int EGG_DALMATIAN_ID;
+	public static int EGG_BEAGLE_ID;
 	
 	//Block IDs
 	public static int DOG_DISH_ID;
@@ -35,4 +36,5 @@ public class Reference
 	public static final int MOB_FRENCH_BULLDOG_ID = 5;
 	public static final int MOB_GERMAN_SHEPHERD_ID = 6;
 	public static final int MOB_DALMATIAN_ID = 7;
+	public static final int MOB_BEAGLE_ID = 8;
 }

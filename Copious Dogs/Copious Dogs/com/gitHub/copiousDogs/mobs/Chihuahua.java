@@ -7,7 +7,7 @@ public class Chihuahua extends Dog
 {
 	public Chihuahua(World world)
 	{
-		super(world, 0.5F);
+		super(world, 0.5F, "chihuahua");
 		this.setSize(0.4f, 1);
 	}
 	

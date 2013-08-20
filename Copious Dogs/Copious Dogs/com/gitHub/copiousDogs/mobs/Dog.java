@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -25,18 +26,40 @@ import com.gitHub.copiousDogs.items.DogCollar;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIBegBiscuit;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIEatDogDish;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIFollowOwnerLeashed;
-import com.gitHub.copiousDogs.mobs.ai.EntityAILieDown;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIMateNearTorch;
+
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class Dog extends EntityTameable
 {
 	
 	protected static float moveSpeed;
+	//String used to get dog breed when breeding
+	private String breed;
 	
 	/**
 	 * A value describing how close this dog is to getting tamed.
 	 * 10 is tamed.
 	 */
+	
+	public String getBreed() {
+		
+		return breed;
+	}
+	
+	@Override
+	public boolean canMateWith(EntityAnimal par1EntityAnimal) {
+		
+		if (par1EntityAnimal instanceof Dog) {
+			
+			Dog dog = (Dog) par1EntityAnimal;
+			
+			return dog == this ? false : this.isInLove() && dog.isInLove()
+					&& breed.equals(dog.getBreed());
+		}
+		
+		return false;
+	}
 	
 	public boolean hasCollar() {
 		
@@ -189,10 +212,11 @@ public class Dog extends EntityTameable
 		this.dataWatcher.addObject(21, (byte)-1);
 	}
 	
-	public Dog(World world, float moveSpeed) {
+	public Dog(World world, float moveSpeed, String breed) {
 		
 		super(world);
 		this.moveSpeed = moveSpeed;
+		this.breed = breed;
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
 		
@@ -200,8 +224,8 @@ public class Dog extends EntityTameable
 		//this.tasks.addTask(1, new EntityAILieDown(this));
 		//
 		
-		this.tasks.addTask(2, new EntityAIMateNearTorch(this, 0.4F, 10F));
-		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
+		this.tasks.addTask(2, new EntityAIMateNearTorch(this, moveSpeed, 10F));
+		this.tasks.addTask(3, new EntityAILeapAtTarget(this, moveSpeed));
 		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, .75F, true));
 		this.tasks.addTask(5, new EntityAIEatDogDish(this, 20F));
 		this.tasks.addTask(6, new EntityAIFollowOwnerLeashed(this, moveSpeed, 5.0F, 2.0F));
@@ -225,6 +249,12 @@ public class Dog extends EntityTameable
 		if (isTamed()) {
 			super.setCustomNameTag(par1Str);
 		}
+	}
+	
+	@Override
+	public boolean isInLove() {
+
+		return this.inLove > 0;
 	}
 	
 	public void setTamed(boolean par1)
@@ -267,18 +297,24 @@ public class Dog extends EntityTameable
 		
 		return this.dataWatcher.getWatchableObjectByte(20);
 	}
-
+	
 	@Override
 	public boolean interact(EntityPlayer par1EntityPlayer) 
 	{
+	
+		System.out.println(FMLCommonHandler.instance().getEffectiveSide());
+		System.out.println(this.isInLove());
 		
-		if (this.worldObj.isRemote) {
+		if (!this.worldObj.isRemote) {
 			
 			ItemStack stack = par1EntityPlayer.getCurrentEquippedItem();
 			
 			if (stack != null && this.isBreedingItem(stack) && this.getGrowingAge() == 0 && this.inLove <= 0 && this.isTamed()
 					&& this.getOwnerName().equalsIgnoreCase(par1EntityPlayer.getEntityName()))
 	        {
+				
+				par1EntityPlayer.swingItem();
+				
 	            if (!par1EntityPlayer.capabilities.isCreativeMode)
 	            {
 	                --stack.stackSize;

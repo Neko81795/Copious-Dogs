@@ -17,6 +17,7 @@ import com.gitHub.copiousDogs.items.DogBiscuit;
 import com.gitHub.copiousDogs.items.DogCollar;
 import com.gitHub.copiousDogs.items.DogDishItem;
 import com.gitHub.copiousDogs.items.DogLeash;
+import com.gitHub.copiousDogs.mobs.Beagle;
 import com.gitHub.copiousDogs.mobs.BerneseMountain;
 import com.gitHub.copiousDogs.mobs.Chihuahua;
 import com.gitHub.copiousDogs.mobs.Dalmatian;
@@ -95,6 +96,7 @@ public class CopiousDogs
     	Reference.EGG_FRENCH_BULLDOG_ID = config.getItem("Egg French Bulldog:", 17008).getInt();
     	Reference.EGG_GERMAN_SHEPHERD_ID = config.getItem("Egg GermanShepherd", 17009).getInt();
     	Reference.EGG_DALMATIAN_ID = config.getItem("Egg Dalmatian:", 17010).getInt();
+    	Reference.EGG_BEAGLE_ID = config.getItem("Egg Beagle:", 17011).getInt();
     	
     	//reads the config file for block ids
     	Reference.DOG_DISH_ID = config.getBlock("Dog dish:", 1701).getInt();
@@ -181,6 +183,13 @@ public class CopiousDogs
     	EntityList.IDtoClassMapping.put(Reference.EGG_DALMATIAN_ID, Dalmatian.class);
     	EntityList.entityEggs.put(Reference.EGG_DALMATIAN_ID,
     			new EntityEggInfo(Reference.EGG_DALMATIAN_ID, 0xFFFFFF , 0x000000));
+    	
+    	//Beagle
+    	EntityRegistry.registerModEntity(Beagle.class, "Beagle", Reference.MOB_BEAGLE_ID, this, 40, 1, true);
+    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.Beagle.name", "Beagle");
+    	EntityList.IDtoClassMapping.put(Reference.EGG_BEAGLE_ID, Beagle.class);
+    	EntityList.entityEggs.put(Reference.EGG_BEAGLE_ID, 
+    			new EntityEggInfo(Reference.EGG_BEAGLE_ID, 0xCE935F, 0x685043));
     	
     	//TODO If we should support extra biomes XL
     	

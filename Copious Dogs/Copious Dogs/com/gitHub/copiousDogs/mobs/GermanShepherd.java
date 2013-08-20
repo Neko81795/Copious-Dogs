@@ -11,7 +11,7 @@ public class GermanShepherd extends Dog
 	
 	public GermanShepherd(World world)
 	{
-		super(world, 0.5F);
+		super(world, 0.5F, "german_shepherd");
 		this.setSize(0.4f, 1);
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));

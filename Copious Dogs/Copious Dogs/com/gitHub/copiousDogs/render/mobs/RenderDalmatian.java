@@ -10,9 +10,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderDalmatian extends RenderDog
 {
-	public RenderDalmatian(ModelBase par1ModelBase, float shadowSize)
+	public RenderDalmatian(ModelBase par1ModelBase, ModelBase par2ModelBase, float shadowSize)
 	{
-		super(par1ModelBase, shadowSize, "dalmatiantexture");
+		super(par1ModelBase, par2ModelBase, shadowSize, "dalmatiantexture");
 	}
 
 	public void renderTutorial(Dalmatian entity, double par2, double par4, double par6, float par8, float par9)

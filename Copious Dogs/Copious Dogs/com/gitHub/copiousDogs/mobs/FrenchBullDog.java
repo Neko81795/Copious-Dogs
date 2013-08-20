@@ -8,7 +8,7 @@ public class FrenchBullDog extends Dog
 {
 	public FrenchBullDog(World world)
 	{
-		super(world, 0.5F);
+		super(world, 0.5F, "french_bulldog");
 		this.setSize(0.4f, 1);
 	}
 	

@@ -9,9 +9,9 @@ import com.gitHub.copiousDogs.mobs.FrenchBullDog;
 
 public class RenderFrenchBulldog extends RenderDog
 {
-	public RenderFrenchBulldog(ModelBase par1ModelBase, float par2)
+	public RenderFrenchBulldog(ModelBase par1ModelBase, ModelBase par2ModelBase, float par2)
 	{
-		super(par1ModelBase, par2, "frenchbulldogtexture");
+		super(par1ModelBase, par2ModelBase, par2, "frenchbulldogtexture");
 	}
 
 	public void renderTutorial(FrenchBullDog entity, double par2, double par4, double par6, float par8, float par9)

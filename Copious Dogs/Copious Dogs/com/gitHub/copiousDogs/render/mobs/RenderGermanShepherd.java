@@ -9,9 +9,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderGermanShepherd extends RenderDog
 {
-	public RenderGermanShepherd(ModelBase par1ModelBase, float shadowSize)
+	public RenderGermanShepherd(ModelBase par1ModelBase, ModelBase par2ModelBase, float shadowSize)
 	{
-		super(par1ModelBase, shadowSize, "germanshepherdtexture");
+		super(par1ModelBase, par2ModelBase, shadowSize, "germanshepherdtexture");
 	}
 
 	public void renderTutorial(GermanShepherd entity, double par2, double par4, double par6, float par8, float par9)

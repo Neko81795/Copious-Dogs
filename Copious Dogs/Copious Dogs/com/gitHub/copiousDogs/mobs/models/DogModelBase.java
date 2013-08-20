@@ -1,12 +1,12 @@
 package com.gitHub.copiousDogs.mobs.models;
 
-import com.gitHub.copiousDogs.mobs.Dog;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
+
+import com.gitHub.copiousDogs.mobs.Dog;
 
 public abstract class DogModelBase extends ModelBase
 {
@@ -60,6 +60,8 @@ public abstract class DogModelBase extends ModelBase
 	public void setRotationAngles(float f, float f1, float f2, float f3,
 			float f4, float f5, Entity entity)
 	{
+		//this.WolfHead.rotateAngleX = f4 / (180F / (float)Math.PI);
+        //this.WolfHead.rotateAngleY = f3 / (180F / (float)Math.PI);
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 	}
 }

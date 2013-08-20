@@ -9,9 +9,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderBerneseMountain extends RenderDog
 {
-	public RenderBerneseMountain(ModelBase par1ModelBase, float shadowSize)
+	public RenderBerneseMountain(ModelBase par1ModelBase, ModelBase par2ModelBase, float shadowSize)
 	{
-		super(par1ModelBase, shadowSize, "bernesemountaindogtexture");
+		super(par1ModelBase, par2ModelBase, shadowSize, "bernesemountaindogtexture");
 	}
 
 	public void renderTutorial(BerneseMountain entity, double par2, double par4, double par6, float par8, float par9)

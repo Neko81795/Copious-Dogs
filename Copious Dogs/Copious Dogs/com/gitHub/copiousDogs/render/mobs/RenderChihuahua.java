@@ -9,9 +9,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderChihuahua extends RenderDog
 {
-	public RenderChihuahua(ModelBase par1ModelBase, float par2)
+	public RenderChihuahua(ModelBase par1ModelBase, ModelBase par2ModelBase, float par2)
 	{
-		super(par1ModelBase, par2, "chihuahuatexture");
+		super(par1ModelBase, par2ModelBase, par2, "chihuahuatexture");
 	}
 
 	public void renderTutorial(Chihuahua entity, double par2, double par4, double par6, float par8, float par9)

@@ -148,25 +148,6 @@ public class ModelHusky extends DogModelBase
 		// entity will always be instance of dog. instanceof calls are slow
 		Dog dog = (Dog) entity;
 
-		if (dog.isBegging())
-		{
-			this.Ear1.setRotationPoint(-1F, 11.5F, -7F);
-			this.Ear2.setRotationPoint(-1F, 11.5F, -7F);
-			this.Ear1.rotateAngleZ = (float) Math.toRadians(30);
-			this.Ear2.rotateAngleZ = (float) Math.toRadians(30);
-			this.WolfHead.rotateAngleZ = (float) Math.toRadians(30);
-			this.Nose.rotateAngleZ = (float) Math.toRadians(30);
-		}
-		else
-		{
-			this.WolfHead.rotateAngleZ = 0;
-			this.Nose.rotateAngleZ = 0;
-			this.Ear1.setRotationPoint(-3F, 13.7F, -8F);
-			this.Ear2.setRotationPoint(2F, 13.5F, -8F);
-			setRotation(Ear1, 0F, 0F, 0.248884F);
-			setRotation(Ear2, 0F, 0F, -0.2488901F);
-		}
-
 		super.setLivingAnimations(dog, walkTime, isWalking, random);
 	}
 
