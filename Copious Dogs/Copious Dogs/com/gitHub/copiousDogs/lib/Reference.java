@@ -1,4 +1,4 @@
-package com.gitHub.copiousDogs;
+package com.gitHub.copiousDogs.lib;
 
 public class Reference 
 {

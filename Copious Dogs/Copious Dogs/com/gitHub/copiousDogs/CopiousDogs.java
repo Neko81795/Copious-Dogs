@@ -17,6 +17,7 @@ import com.gitHub.copiousDogs.items.DogBiscuit;
 import com.gitHub.copiousDogs.items.DogCollar;
 import com.gitHub.copiousDogs.items.DogDishItem;
 import com.gitHub.copiousDogs.items.DogLeash;
+import com.gitHub.copiousDogs.lib.Reference;
 import com.gitHub.copiousDogs.mobs.Beagle;
 import com.gitHub.copiousDogs.mobs.BerneseMountain;
 import com.gitHub.copiousDogs.mobs.Chihuahua;
@@ -215,6 +216,7 @@ public class CopiousDogs
 	    	EntityRegistry.addSpawn(Husky.class, 15, 2, 8, EnumCreatureType.creature, BiomeGenBase.icePlains, BiomeGenBase.taiga,
 	    			BiomeGenBase.taigaHills, BiomeGenBase.iceMountains);
 	    	EntityRegistry.addSpawn(GoldenRetriever.class, 15, 2, 6, EnumCreatureType.creature, BiomeGenBase.plains);
+	    	EntityRegistry.addSpawn(Beagle.class, 15, 2, 6, EnumCreatureType.creature, BiomeGenBase.forest, BiomeGenBase.forestHills);
     	//}
     	
     	//

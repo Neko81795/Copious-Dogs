@@ -55,23 +55,9 @@ public class BlockDogDish extends BlockContainer {
 	}
 	
 	@Override
-	public int getRenderType() {
-		
-		//TODO return CopiousDogs.dogDishRendererID when rendering issue is fixed
-		return 0;
-	}
-	
-	@Override
 	public boolean isOpaqueCube() {
 		
 		return false;
-	}
-	
-	@Override
-	public boolean renderAsNormalBlock() {
-		
-		//TODO return false when rendering issue is fixed
-		return true;
 	}
 	
 	@Override

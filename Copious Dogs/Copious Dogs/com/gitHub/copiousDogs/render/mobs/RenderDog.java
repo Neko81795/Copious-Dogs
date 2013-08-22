@@ -13,8 +13,8 @@ import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.opengl.GL11;
 
-import com.gitHub.copiousDogs.Reference;
 import com.gitHub.copiousDogs.items.DogCollar;
+import com.gitHub.copiousDogs.lib.Reference;
 import com.gitHub.copiousDogs.mobs.Dog;
 
 public class RenderDog extends RenderLiving {
