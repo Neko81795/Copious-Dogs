@@ -5,9 +5,12 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -45,6 +48,64 @@ public class RenderDog extends RenderLiving {
             return -1;
         }
     }
+	
+	@Override
+	public void doRenderLiving(EntityLiving par1EntityLiving, double par2,
+			double par4, double par6, float par8, float par9) {
+		
+		super.doRenderLiving(par1EntityLiving, par2, par4, par6, par8, par9);
+		
+		Dog dog = (Dog) par1EntityLiving;
+		
+		if (dog.isLeashed()) {
+			
+			float f9 = ((EntityLivingBase) dog.getOwner()).getSwingProgress(par9);
+	        float f10 = MathHelper.sin(MathHelper.sqrt_float(f9) * (float)Math.PI);
+			
+	        Vec3 vec3 = dog.worldObj.getWorldVec3Pool().getVecFromPool(-.03D, 0D, -.03D);
+	        vec3.rotateAroundX(-(dog.getOwner().prevRotationPitch + (dog.getOwner().rotationPitch - dog.getOwner().prevRotationPitch) * par9) * (float)Math.PI / 180.0F);
+	        vec3.rotateAroundY(-(dog.getOwner().prevRotationYaw + (dog.getOwner().rotationYaw - dog.getOwner().prevRotationYaw) * par9) * (float)Math.PI / 180.0F);
+	        vec3.rotateAroundY(f10 * 0.5F);
+	        vec3.rotateAroundX(-f10 * 0.7F);
+			
+			double d3 = dog.getOwner().prevPosX + (dog.getOwner().posX - dog.getOwner().prevPosX) * (double)par9 + vec3.xCoord;
+	        double d4 = dog.getOwner().prevPosY + (dog.getOwner().posY - dog.getOwner().prevPosY) * (double)par9 + vec3.yCoord;
+	        double d5 = dog.getOwner().prevPosZ + (dog.getOwner().posZ - dog.getOwner().prevPosZ) * (double)par9 + vec3.zCoord;
+			
+			double d9 = par1EntityLiving.prevPosX + (par1EntityLiving.posX - par1EntityLiving.prevPosX) * (double)par9;
+	        double d10 = par1EntityLiving.prevPosY + (par1EntityLiving.posY - par1EntityLiving.prevPosY) * (double)par9 + 0.5D;
+	        double d11 = par1EntityLiving.prevPosZ + (par1EntityLiving.posZ - par1EntityLiving.prevPosZ) * (double)par9;
+	        double d12 = (double)((float)(d3 - d9));
+	        double d13 = (double)((float)(d4 - d10));
+	        double d14 = (double)((float)(d5 - d11));
+	        GL11.glDisable(GL11.GL_TEXTURE_2D);
+	        GL11.glDisable(GL11.GL_LIGHTING);
+	        
+	        Tessellator tessellator = Tessellator.instance;
+	 
+	        tessellator.startDrawing(3);
+	        tessellator.setColorOpaque_I(0);
+	        byte b2 = 16;
+	
+	        for (int i = 0; i <= b2; ++i)
+	        {
+	            float f12 = (float)i / (float)b2;
+	            tessellator.addVertex(par2 + d12 * (double)f12, par4 + d13 * (double)(f12 * f12 + f12) * 0.5D + 0.25D, par6 + d14 * (double)f12);
+	        }
+	        
+	        tessellator.draw();
+	        
+	        GL11.glEnable(GL11.GL_TEXTURE_2D);
+	        GL11.glEnable(GL11.GL_LIGHTING);
+		}
+	}
+	
+	@Override
+	public void doRender(Entity par1Entity, double par2, double par4,
+			double par6, float par8, float par9) {
+
+		doRenderLiving((EntityLiving)par1Entity, par2, par4, par6, par8, par9);
+	}
 	
 	@Override
 	protected void passSpecialRender(EntityLivingBase par1EntityLivingBase,

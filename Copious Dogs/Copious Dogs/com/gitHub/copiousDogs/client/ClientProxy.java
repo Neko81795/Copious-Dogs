@@ -1,7 +1,11 @@
 package com.gitHub.copiousDogs.client;
 
+import net.minecraftforge.client.MinecraftForgeClient;
+
 import com.gitHub.copiousDogs.CommonProxy;
+import com.gitHub.copiousDogs.CopiousDogs;
 import com.gitHub.copiousDogs.blocks.tileentities.TileEntityDogDish;
+import com.gitHub.copiousDogs.items.render.ItemDogDishRenderer;
 import com.gitHub.copiousDogs.mobs.Beagle;
 import com.gitHub.copiousDogs.mobs.BerneseMountain;
 import com.gitHub.copiousDogs.mobs.Chihuahua;
@@ -26,6 +30,7 @@ import com.gitHub.copiousDogs.render.mobs.RenderFrenchBulldog;
 import com.gitHub.copiousDogs.render.mobs.RenderGermanShepherd;
 import com.gitHub.copiousDogs.render.mobs.RenderGoldenRetriever;
 import com.gitHub.copiousDogs.render.mobs.RenderHusky;
+import com.gitHub.copiousDogs.render.tileentity.TileEntityDogDishRenderer;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -35,6 +40,8 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerRenderers() {
 		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDogDish.class, new TileEntityDogDishRenderer());
+		MinecraftForgeClient.registerItemRenderer(CopiousDogs.dogDish.blockID, new ItemDogDishRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(GoldenRetriever.class,
 				new RenderGoldenRetriever(new ModelGoldenRetriever(), new ModelGoldenRetriever(), 0.6f));
 		RenderingRegistry.registerEntityRenderingHandler(Husky.class,

@@ -5,30 +5,23 @@ import java.util.Random;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import com.gitHub.copiousDogs.CopiousDogs;
 import com.gitHub.copiousDogs.blocks.tileentities.TileEntityDogDish;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-public class BlockDogDish extends BlockContainer {
-	
-	private Icon[] blockIcons;
+public class BlockDogDish extends BlockContainer { 
 	
 	public BlockDogDish(int id) {
 
 		super(id, Material.leaves);
-		setBlockBounds(.25F, 0F, .25F, .75F, .25F, .75F);
+		setBlockBounds(.20F, 0F, .20F, .8F, .25F, .8F);
 		setCreativeTab(CopiousDogs.tabCopiousDogs);
 		setUnlocalizedName("dogDish");
 		setLightOpacity(1);
@@ -36,22 +29,20 @@ public class BlockDogDish extends BlockContainer {
 	}
 	
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		
-		blockIcons = new Icon[16];
-		
-		for (int i = 0; i < 16; i++) {
-			
-			blockIcons[i] = par1IconRegister.registerIcon("copiousdogs:" + getUnlocalizedName().substring(5) + "_" + ItemDye.field_94595_b[getDyeFromBlock(i)]);
-		}
+	public boolean renderAsNormalBlock() {
+
+		return false;
 	}
 	
 	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int par1, int par2) {
+	public int getRenderType() {
 
-		return blockIcons[par2];
+		return -1;
+	}
+	
+	public static String getTextureFromMetadata(int par0) {
+		
+		return "dogDish_" + ItemDye.field_94595_b[getDyeFromBlock(par0)];
 	}
 	
 	@Override
