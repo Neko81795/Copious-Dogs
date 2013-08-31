@@ -13,6 +13,7 @@ public class DogLeash extends ItemCopiousDogs {
 		
 		super(id);
 		setUnlocalizedName("dogLeash");
+		func_111206_d("dog_leash");
 	}
 	
 	@Override

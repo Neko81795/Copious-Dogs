@@ -18,9 +18,4 @@ public class BerneseMountain extends Dog
     {
 		return 2;
     }
-	
-	public boolean attackEntityAsMob(Entity par1Entity)
-    {
-        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), getAttackStrength(par1Entity));
-    }
 }

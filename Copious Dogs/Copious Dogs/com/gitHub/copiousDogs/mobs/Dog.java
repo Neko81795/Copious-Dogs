@@ -3,6 +3,7 @@ package com.gitHub.copiousDogs.mobs;
 import java.lang.reflect.Constructor;
 import java.util.Random;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -26,6 +27,7 @@ import com.gitHub.copiousDogs.items.DogCollar;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIBegBiscuit;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIEatDogDish;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIFollowOwnerLeashed;
+import com.gitHub.copiousDogs.mobs.ai.EntityAILieDown;
 import com.gitHub.copiousDogs.mobs.ai.EntityAIMateNearTorch;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -36,6 +38,7 @@ public class Dog extends EntityTameable
 	protected static float moveSpeed;
 	//String used to get dog breed when breeding
 	private String breed;
+	private int attStrength;
 	
 	/**
 	 * A value describing how close this dog is to getting tamed.
@@ -45,7 +48,18 @@ public class Dog extends EntityTameable
 	public String getBreed() {
 		
 		return breed;
+	
 	}
+	
+	public int getAttackStrength(Entity par1Entity) {
+		
+		return 2;
+	}
+	
+	public boolean attackEntityAsMob(Entity par1Entity)
+    {
+        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), getAttackStrength(par1Entity));
+    }
 	
 	@Override
 	public boolean canMateWith(EntityAnimal par1EntityAnimal) {
@@ -217,13 +231,10 @@ public class Dog extends EntityTameable
 		super(world);
 		this.moveSpeed = moveSpeed;
 		this.breed = breed;
+		
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		
-		//TODO make this work
-		//this.tasks.addTask(1, new EntityAILieDown(this));
-		//
-		
+		this.tasks.addTask(1, new EntityAILieDown(this));
 		this.tasks.addTask(2, new EntityAIMateNearTorch(this, moveSpeed, 10F));
 		this.tasks.addTask(3, new EntityAILeapAtTarget(this, moveSpeed));
 		this.tasks.addTask(4, new EntityAIAttackOnCollide(this, .75F, true));

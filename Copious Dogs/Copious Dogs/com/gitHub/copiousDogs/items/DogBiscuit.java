@@ -34,7 +34,7 @@ public class DogBiscuit extends ItemCopiousDogs
 				
 				if (!par2EntityPlayer.capabilities.isCreativeMode) 
 				{
-					dog.setTameValue((byte)(dog.getTameValue() + dog.getRNG().nextInt(10)));
+					dog.setTameValue((byte)(dog.getTameValue() + + 3 + dog.getRNG().nextInt(8)));
 						
 					dog.tryToTame(par2EntityPlayer);
 					par1ItemStack.stackSize--;
