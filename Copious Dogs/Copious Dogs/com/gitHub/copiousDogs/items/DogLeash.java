@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 import com.gitHub.copiousDogs.CopiousDogs;
-import com.gitHub.copiousDogs.mobs.Dog;
+import com.gitHub.copiousDogs.entity.Dog;
 
 public class DogLeash extends ItemCopiousDogs {
 	

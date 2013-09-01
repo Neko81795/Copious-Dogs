@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 
 import com.gitHub.copiousDogs.CopiousDogs;
-import com.gitHub.copiousDogs.mobs.Dog;
+import com.gitHub.copiousDogs.entity.Dog;
 
 public class DogCollar extends ItemColored {
 	

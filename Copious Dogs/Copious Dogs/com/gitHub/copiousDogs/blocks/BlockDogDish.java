@@ -14,7 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.gitHub.copiousDogs.CopiousDogs;
-import com.gitHub.copiousDogs.blocks.tileentities.TileEntityDogDish;
+import com.gitHub.copiousDogs.blocks.tileentity.TileEntityDogDish;
 
 public class BlockDogDish extends BlockContainer { 
 	
