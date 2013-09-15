@@ -4,12 +4,12 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 import com.gitHub.copiousDogs.blocks.tileentity.TileEntityDogDish;
 import com.gitHub.copiousDogs.lib.Reference;
@@ -41,14 +41,17 @@ public class PacketHandler implements IPacketHandler {
 		
 		DataInputStream stream = new DataInputStream(new ByteArrayInputStream(packet.data));
 		
+		System.out.println("Received!");
+		
 		try {
 			
-			int id = stream.readInt();
+			int id = stream.read();
+			
+			System.out.println(id + "   " + stream.read() + "   " + stream.read() + "   " + stream.read());
 			
 			switch(id) {
 			
-			case 0: handleEntityItemSpawnPacket(packet, player, stream);
-			case 1: handleDogDishUpdatePacket(packet, player, stream);
+			case 0: handleTileEntityPacket(packet, player, stream);
 			default: return;
 			}
 			
@@ -59,66 +62,64 @@ public class PacketHandler implements IPacketHandler {
 		}	
 	}
 	
-	private void handleEntityItemSpawnPacket(Packet250CustomPayload packet, Player player, DataInputStream stream) {
+	private void handleTileEntityPacket(Packet250CustomPayload packet, Player player, DataInputStream stream) {
 		
-		Side side = FMLCommonHandler.instance().getEffectiveSide();
+		System.out.println("received!");
 		
-		if (side == Side.SERVER) {
-			
-			EntityPlayerMP mpPlayer = (EntityPlayerMP) player;
-			
-			try {
-				
-				float x = stream.readFloat();
-				float y = stream.readFloat();
-				float z = stream.readFloat();
-				float motionX = stream.readFloat();
-				float motionY = stream.readFloat();
-				float motionZ = stream.readFloat();
-				int itemID = stream.readInt();
-				int amount = stream.readInt();
-				int damage = stream.readInt();
-				
-				EntityItem item = new EntityItem(mpPlayer.worldObj, x, y, z, new ItemStack(itemID, amount, damage));
-				item.motionX = motionX;
-				item.motionY = motionY;
-				item.motionZ = motionZ;
-				
-				mpPlayer.worldObj.spawnEntityInWorld(item);
-				
-			} catch (IOException e) {
-				
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	private void handleDogDishUpdatePacket(Packet250CustomPayload packet, Player player, DataInputStream stream) {
-
+		int x = 0;
+		int y = 0;
+		int z = 0;
+		
+		float food = 0;
 		try {
 			
-			int x = stream.read();
-			int y = stream.read();
-			int z = stream.read();
+			x = stream.read();
+			y = stream.read();
+			z = stream.read();
 			
-			float value = stream.readFloat();
-			
-			EntityPlayerMP mpPlayer = (EntityPlayerMP) player;
-			
-			TileEntity entity = mpPlayer.worldObj.getBlockTileEntity(x, y, z);
-			
-			if (entity != null && entity instanceof TileEntityDogDish) {
-				
-				TileEntityDogDish te = (TileEntityDogDish) entity;
-				
-				te.setFoodLevel(value);
-				
-				mpPlayer.worldObj.markBlockForUpdate(x, y, z);
-			}
+			food = stream.readFloat();
 			
 		} catch (IOException e) {
 
+			
 			e.printStackTrace();
+		}
+		
+		System.out.println(food);
+		
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
+			
+			World world = ((EntityPlayer)player).worldObj;
+			
+			if (world.blockExists(x, y, z)) {
+				
+				TileEntity te = world.getBlockTileEntity(x, y, z);
+				
+				if (te != null && te instanceof TileEntityDogDish) {
+					
+					TileEntityDogDish dish = (TileEntityDogDish) te;
+					
+					dish.setFoodLevel(food);
+					dish.onInventoryChanged();
+				}
+			}
+		}
+		else if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+			
+			World world = ((EntityPlayerMP) player).worldObj;
+			
+			if (world.blockExists(x, y, z)) {
+				
+				TileEntity te = world.getBlockTileEntity(x, y, z);
+				
+				if (te != null && te instanceof TileEntityDogDish) {
+					
+					TileEntityDogDish dish = (TileEntityDogDish) te;
+					
+					dish.setFoodLevel(food);
+					dish.onInventoryChanged();
+				}
+			}
 		}
 	}
 }
