@@ -47,7 +47,7 @@ public class PacketHandler implements IPacketHandler {
 			
 			int id = stream.read();
 			
-			System.out.println(id + "   " + stream.read() + "   " + stream.read() + "   " + stream.read());
+			System.out.println(id);
 			
 			switch(id) {
 			
