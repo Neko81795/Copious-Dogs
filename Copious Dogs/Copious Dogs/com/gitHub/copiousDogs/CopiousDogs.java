@@ -8,10 +8,13 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.Configuration;
 
 import com.gitHub.copiousDogs.blocks.BlockDogDish;
 import com.gitHub.copiousDogs.blocks.tileentity.TileEntityDogDish;
+import com.gitHub.copiousDogs.configuration.CopiousDogsEntity;
 import com.gitHub.copiousDogs.entity.Beagle;
 import com.gitHub.copiousDogs.entity.BerneseMountain;
 import com.gitHub.copiousDogs.entity.Chihuahua;
@@ -128,96 +131,8 @@ public class CopiousDogs
     	//
     	dogLeash = new DogLeash(Reference.DOG_LEASH_ID);
     	LanguageRegistry.addName(dogLeash, "Dog Leash");
-    	//
-    	//Golden Retriever
-    	//
-    	EntityRegistry.registerModEntity(GoldenRetriever.class, "Golden Retriever", Reference.MOB_GOLDEN_RETRIEVER_ID, this, 40, 1, true);
-    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.Golden Retriever.name", "Golden Retriever");
-    	EntityList.IDtoClassMapping.put(Reference.EGG_GOLDEN_RETRIEVER_ID, GoldenRetriever.class);
-    	EntityList.entityEggs.put(Reference.EGG_GOLDEN_RETRIEVER_ID,
-    			new EntityEggInfo(Reference.EGG_GOLDEN_RETRIEVER_ID, 0xbc8e5f , 0xddcdb6));
-    	//
-    	//Husky
-    	//
-    	EntityRegistry.registerModEntity(Husky.class, "Husky", Reference.MOB_HUSKY_ID, this, 40, 1, true);
-    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.Husky.name", "Husky");
-    	EntityList.IDtoClassMapping.put(Reference.EGG_HUSKY_ID, Husky.class);
-    	EntityList.entityEggs.put(Reference.EGG_HUSKY_ID,
-    			new EntityEggInfo(Reference.EGG_HUSKY_ID, 0x2b2e2d , 0x7e807d));
-    	//
-    	//Bernese Mountain
-    	//
-    	EntityRegistry.registerModEntity(BerneseMountain.class, "Bernese Mountain", Reference.MOB_BERNESE_MOUNTAIN_ID, this, 40, 1, true);
-    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.Bernese Mountain.name", "Bernese Mountain");
-    	EntityList.IDtoClassMapping.put(Reference.EGG_BERNESE_MOUNTAIN_ID, BerneseMountain.class);
-    	EntityList.entityEggs.put(Reference.EGG_BERNESE_MOUNTAIN_ID,
-    			new EntityEggInfo(Reference.EGG_BERNESE_MOUNTAIN_ID, 0x04070e , 0x723f21));
-    	//
-    	//Chihuahua
-    	//
-    	EntityRegistry.registerModEntity(Chihuahua.class, "Chihuahua", Reference.MOB_CHIHUAHUA_ID, this, 40, 1, true);
-    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.Chihuahua.name", "Chihuahua");
-    	EntityList.IDtoClassMapping.put(Reference.EGG_CHIHUAHUA_ID, Chihuahua.class);
-    	EntityList.entityEggs.put(Reference.EGG_CHIHUAHUA_ID,
-    			new EntityEggInfo(Reference.EGG_CHIHUAHUA_ID, 0xc7a087 , 0x9e7f6b));
-    	//
-    	//French Bulldog
-    	//
-    	EntityRegistry.registerModEntity(FrenchBullDog.class, "French Bulldog", Reference.MOB_FRENCH_BULLDOG_ID, this, 40, 1, true);
-    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.French Bulldog.name", "French Bulldog");
-    	EntityList.IDtoClassMapping.put(Reference.EGG_FRENCH_BULLDOG_ID, FrenchBullDog.class);
-    	EntityList.entityEggs.put(Reference.EGG_FRENCH_BULLDOG_ID,
-    			new EntityEggInfo(Reference.EGG_FRENCH_BULLDOG_ID, 0x151618 , 0xbdbdb7));
-    	//
-    	//GermanShepherd
-    	//
-    	EntityRegistry.registerModEntity(GermanShepherd.class, "German Shepherd", Reference.MOB_GERMAN_SHEPHERD_ID, this, 40, 1, true);
-    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.German Shepherd.name", "German Shepherd");
-    	EntityList.IDtoClassMapping.put(Reference.EGG_GERMAN_SHEPHERD_ID, GermanShepherd.class);
-    	EntityList.entityEggs.put(Reference.EGG_GERMAN_SHEPHERD_ID,
-    			new EntityEggInfo(Reference.EGG_GERMAN_SHEPHERD_ID, 0xad754f , 0x17141b));
-    	//
-    	//Dalmatian
-    	//
-    	EntityRegistry.registerModEntity(Dalmatian.class, "Dalmatian", Reference.MOB_DALMATIAN_ID, this, 40, 1, true);
-    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.Dalmatian.name", "Dalmatian");
-    	EntityList.IDtoClassMapping.put(Reference.EGG_DALMATIAN_ID, Dalmatian.class);
-    	EntityList.entityEggs.put(Reference.EGG_DALMATIAN_ID,
-    			new EntityEggInfo(Reference.EGG_DALMATIAN_ID, 0xFFFFFF , 0x000000));
     	
-    	//Beagle
-    	EntityRegistry.registerModEntity(Beagle.class, "Beagle", Reference.MOB_BEAGLE_ID, this, 40, 1, true);
-    	LanguageRegistry.instance().addStringLocalization("entity.CopiousDogs.Beagle.name", "Beagle");
-    	EntityList.IDtoClassMapping.put(Reference.EGG_BEAGLE_ID, Beagle.class);
-    	EntityList.entityEggs.put(Reference.EGG_BEAGLE_ID, 
-    			new EntityEggInfo(Reference.EGG_BEAGLE_ID, 0xCE935F, 0x685043));
-    	
-    	//TODO If we should support extra biomes XL
-    	
-    	/*if (Loader.isModLoaded("ExtrabiomesXL")) {
-    		
-    		EntityRegistry.addSpawn(Dalmatian.class, 15, 2, 6, EnumCreatureType.creature, BiomeGenBase.forest, BiomeGenBase.forestHills);
-    	    EntityRegistry.addSpawn(GermanShepherd.class, 15, 2, 6, EnumCreatureType.creature, BiomeGenBase.plains);
-    	    EntityRegistry.addSpawn(Chihuahua.class, 15, 2, 8, EnumCreatureType.creature, BiomeGenBase.plains);
-    	    EntityRegistry.addSpawn(FrenchBullDog.class, 15, 2, 8, EnumCreatureType.creature, BiomeGenBase.plains);
-    	    EntityRegistry.addSpawn(BerneseMountain.class, 15, 2, 8, EnumCreatureType.creature, BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsEdge);
-    	    EntityRegistry.addSpawn(Husky.class, 15, 2, 8, EnumCreatureType.creature, BiomeGenBase.icePlains, BiomeGenBase.taiga,
-    	    		BiomeGenBase.taigaHills, BiomeGenBase.iceMountains);
-    	    EntityRegistry.addSpawn(GoldenRetriever.class, 15, 2, 6, EnumCreatureType.creature, BiomeGenBase.plains);
-    	    	
-    	}*/
-    	//else {
-    		
-    		EntityRegistry.addSpawn(Dalmatian.class, 15, 2, 6, EnumCreatureType.creature, BiomeGenBase.forest, BiomeGenBase.forestHills);
-	    	EntityRegistry.addSpawn(GermanShepherd.class, 15, 2, 6, EnumCreatureType.creature, BiomeGenBase.plains);
-	    	EntityRegistry.addSpawn(Chihuahua.class, 15, 2, 8, EnumCreatureType.creature, BiomeGenBase.plains);
-	    	EntityRegistry.addSpawn(FrenchBullDog.class, 15, 2, 8, EnumCreatureType.creature, BiomeGenBase.plains);
-	    	EntityRegistry.addSpawn(BerneseMountain.class, 15, 2, 8, EnumCreatureType.creature, BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsEdge);
-	    	EntityRegistry.addSpawn(Husky.class, 15, 2, 8, EnumCreatureType.creature, BiomeGenBase.icePlains, BiomeGenBase.taiga,
-	    			BiomeGenBase.taigaHills, BiomeGenBase.iceMountains);
-	    	EntityRegistry.addSpawn(GoldenRetriever.class, 15, 2, 6, EnumCreatureType.creature, BiomeGenBase.plains);
-	    	EntityRegistry.addSpawn(Beagle.class, 15, 2, 6, EnumCreatureType.creature, BiomeGenBase.forest, BiomeGenBase.forestHills);
-    	//}
+    	CopiousDogsEntity.init();
     	
     	//
     	// Dog Dish
@@ -228,25 +143,15 @@ public class CopiousDogs
     	LanguageRegistry.addName(dogDish, "Dog Dish");
 
     	proxy.registerRenderers();
-    	registerRecipes();
+    	proxy.registerRecipes();
     }
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) 
     {
-    }
-    
-    public void registerRecipes() {
     	
-    	GameRegistry.addRecipe(new ItemStack(dogBiscuit), " m ", "mbm", " m ", 'm', Item.porkRaw, 'b', Item.bone);
-    	GameRegistry.addRecipe(new ItemStack(dogDish), "III", "IBI", "III", 'I', Item.ingotIron, 'B', Item.bucketEmpty);
-    	GameRegistry.addRecipe(new ItemStack(dogCollar), "SSS", "S S", "SSI", 'S', Item.silk, 'I', Item.ingotIron);
-    	GameRegistry.addRecipe(new ItemStack(dogLeash), "SS", "SS", "SS", 'S', Item.silk);
-    
-    	for (int i = 0; i < 16; i++) {
-    		
-    		GameRegistry.addShapelessRecipe(new ItemStack(dogDish, 1, i), new ItemStack(Item.dyePowder, 1, BlockDogDish.getDyeFromBlock(i)), dogDish);
-    		GameRegistry.addShapelessRecipe(new ItemStack(dogCollar, 1, i), new ItemStack(Item.dyePowder, 1, DogCollar.getDyeFromItem(i)), dogCollar);
-    	}
+    	BiomeDictionary.registerAllBiomes();
+    	
+    	CopiousDogsEntity.postInit();
     }
 }

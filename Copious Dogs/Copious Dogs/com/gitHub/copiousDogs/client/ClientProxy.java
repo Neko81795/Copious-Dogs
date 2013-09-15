@@ -6,7 +6,6 @@ import com.gitHub.copiousDogs.CommonProxy;
 import com.gitHub.copiousDogs.CopiousDogs;
 import com.gitHub.copiousDogs.blocks.tileentity.TileEntityDogDish;
 import com.gitHub.copiousDogs.client.model.entity.ModelBeagle;
-import com.gitHub.copiousDogs.client.model.entity.ModelBerneseMountainDog;
 import com.gitHub.copiousDogs.client.model.entity.ModelChihuahua;
 import com.gitHub.copiousDogs.client.model.entity.ModelDalmatian;
 import com.gitHub.copiousDogs.client.model.entity.ModelFrenchBulldog;
@@ -14,7 +13,6 @@ import com.gitHub.copiousDogs.client.model.entity.ModelGermanShepherd;
 import com.gitHub.copiousDogs.client.model.entity.ModelGoldenRetriever;
 import com.gitHub.copiousDogs.client.model.entity.ModelHusky;
 import com.gitHub.copiousDogs.client.render.entity.RenderBeagle;
-import com.gitHub.copiousDogs.client.render.entity.RenderBerneseMountain;
 import com.gitHub.copiousDogs.client.render.entity.RenderChihuahua;
 import com.gitHub.copiousDogs.client.render.entity.RenderDalmatian;
 import com.gitHub.copiousDogs.client.render.entity.RenderFrenchBulldog;
@@ -24,7 +22,6 @@ import com.gitHub.copiousDogs.client.render.entity.RenderHusky;
 import com.gitHub.copiousDogs.client.render.items.ItemDogDishRenderer;
 import com.gitHub.copiousDogs.client.render.tileentity.TileEntityDogDishRenderer;
 import com.gitHub.copiousDogs.entity.Beagle;
-import com.gitHub.copiousDogs.entity.BerneseMountain;
 import com.gitHub.copiousDogs.entity.Chihuahua;
 import com.gitHub.copiousDogs.entity.Dalmatian;
 import com.gitHub.copiousDogs.entity.FrenchBullDog;
@@ -46,8 +43,6 @@ public class ClientProxy extends CommonProxy {
 				new RenderGoldenRetriever(new ModelGoldenRetriever(), new ModelGoldenRetriever(), 0.6f));
 		RenderingRegistry.registerEntityRenderingHandler(Husky.class,
 				new RenderHusky(new ModelHusky(), new ModelHusky(), 0.6f));
-		RenderingRegistry.registerEntityRenderingHandler(BerneseMountain.class,
-				new RenderBerneseMountain(new ModelBerneseMountainDog(), new ModelBerneseMountainDog(), 0.8f));
 		RenderingRegistry.registerEntityRenderingHandler(Chihuahua.class,
 				new RenderChihuahua(new ModelChihuahua(), new ModelChihuahua(), 0.2f));
 		RenderingRegistry.registerEntityRenderingHandler(FrenchBullDog.class,

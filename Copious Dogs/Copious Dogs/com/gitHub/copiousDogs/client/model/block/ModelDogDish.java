@@ -1,6 +1,7 @@
 package com.gitHub.copiousDogs.client.model.block;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
@@ -23,7 +24,7 @@ public class ModelDogDish extends ModelBase {
 	
 	public void render() {
 		
-		model.renderAll();
+		model.renderPart("Dish");
 	}
 	
 	public void render(TileEntityDogDish tileEntity, float par2, float par3, float par4) {
@@ -40,6 +41,18 @@ public class ModelDogDish extends ModelBase {
 
 	    render();
 
+	    if (tileEntity.getFoodLevel() > 0) {
+	    	
+	    	FMLClientHandler.instance().getClient().renderEngine.func_110577_a(
+	    			new ResourceLocation("copiousdogs:textures/blocks/food.png"));
+	    	
+	    	float var0 = 0.2f * ((tileEntity.getFoodLevel() - 1) / tileEntity.getMaxFoodLevel());
+	    	
+	    	GL11.glTranslatef(0, var0, 0);
+	    	
+	    	model.renderPart("Food");
+	    }
+	    
 	    GL11.glPopMatrix();
 	}
 }

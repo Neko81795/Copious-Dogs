@@ -1,8 +1,14 @@
 package com.gitHub.copiousDogs.blocks.tileentity;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityDogDish extends TileEntity {
@@ -15,7 +21,6 @@ public class TileEntityDogDish extends TileEntity {
 	 * full.
 	 */
 	private float foodLevel = 0;
-	
 	/**
 	 * The maximum amount of food this dog dish can store.
 	 */
@@ -29,6 +34,16 @@ public class TileEntityDogDish extends TileEntity {
 	public float getFoodLevel() {
 		
 		return foodLevel;
+	}
+	
+	public void setFoodLevel(float par0) {
+		
+		foodLevel = par0;
+	}
+	
+	public float getMaxFoodLevel() {
+		
+		return maxFoodLevel;
 	}
 	
 	/**
@@ -46,6 +61,33 @@ public class TileEntityDogDish extends TileEntity {
 		else return 0;
 	}
 	
+	public void sendChangeToServer() {
+		
+		ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+		DataOutputStream outputStream = new DataOutputStream(bos);
+		
+		try {
+			
+			outputStream.writeInt(1);
+			
+			outputStream.writeInt(xCoord);
+			outputStream.writeInt(yCoord);
+			outputStream.writeInt(zCoord);
+			
+			outputStream.writeFloat(foodLevel);
+		}catch(Exception ex) {
+			
+			ex.printStackTrace();
+		}
+		
+		Packet250CustomPayload packet = new Packet250CustomPayload();
+		packet.channel = "CopiousDogs#1";
+		packet.data = bos.toByteArray();
+		packet.length = bos.size();
+		
+		PacketDispatcher.sendPacketToAllPlayers(packet);
+	}
+	
 	/**
 	 * Tries to add the given item
 	 * to the dog dish. Return true
@@ -56,7 +98,7 @@ public class TileEntityDogDish extends TileEntity {
 	 */
 	public boolean addFood(ItemStack stack) {
 		
-		System.out.println(foodLevel);
+		System.out.println(foodLevel + "    " + FMLCommonHandler.instance().getEffectiveSide());
 		
 		if (stack == null) return false;
 		
@@ -71,11 +113,13 @@ public class TileEntityDogDish extends TileEntity {
 			else if (foodLevel + foodAmount > maxFoodLevel) {
 				
 				foodLevel = maxFoodLevel;
+				sendChangeToServer();
 				return true;
 			}
 			else {
 				
 				foodLevel += foodAmount;
+				sendChangeToServer();
 				return true;
 			}
 		}
@@ -100,11 +144,15 @@ public class TileEntityDogDish extends TileEntity {
 			if (foodLevel - amount < 0) {
 				
 				foodLevel = 0;
+				System.out.println(foodLevel);
+				sendChangeToServer();
 				return foodLevel;
 			}
 			else {
 				
 				foodLevel -= amount;
+				System.out.println(foodLevel);
+				sendChangeToServer();
 				return amount;
 			}
 		}

@@ -15,6 +15,7 @@ public class TileEntityDogDishRenderer extends TileEntitySpecialRenderer {
 			double d2, float f) {
 
 		if (tileentity instanceof TileEntityDogDish) {
+			
 			model.render((TileEntityDogDish) tileentity, (float)d0, (float)d1, (float)d2);
 		}
 	}

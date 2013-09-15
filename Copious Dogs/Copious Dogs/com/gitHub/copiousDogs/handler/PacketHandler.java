@@ -9,7 +9,9 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.tileentity.TileEntity;
 
+import com.gitHub.copiousDogs.blocks.tileentity.TileEntityDogDish;
 import com.gitHub.copiousDogs.lib.Reference;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -46,6 +48,7 @@ public class PacketHandler implements IPacketHandler {
 			switch(id) {
 			
 			case 0: handleEntityItemSpawnPacket(packet, player, stream);
+			case 1: handleDogDishUpdatePacket(packet, player, stream);
 			default: return;
 			}
 			
@@ -87,6 +90,35 @@ public class PacketHandler implements IPacketHandler {
 				
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	private void handleDogDishUpdatePacket(Packet250CustomPayload packet, Player player, DataInputStream stream) {
+
+		try {
+			
+			int x = stream.read();
+			int y = stream.read();
+			int z = stream.read();
+			
+			float value = stream.readFloat();
+			
+			EntityPlayerMP mpPlayer = (EntityPlayerMP) player;
+			
+			TileEntity entity = mpPlayer.worldObj.getBlockTileEntity(x, y, z);
+			
+			if (entity != null && entity instanceof TileEntityDogDish) {
+				
+				TileEntityDogDish te = (TileEntityDogDish) entity;
+				
+				te.setFoodLevel(value);
+				
+				mpPlayer.worldObj.markBlockForUpdate(x, y, z);
+			}
+			
+		} catch (IOException e) {
+
+			e.printStackTrace();
 		}
 	}
 }

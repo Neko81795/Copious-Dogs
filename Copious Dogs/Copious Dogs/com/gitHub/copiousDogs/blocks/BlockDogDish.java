@@ -5,18 +5,22 @@ import java.util.Random;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import com.gitHub.copiousDogs.CopiousDogs;
 import com.gitHub.copiousDogs.blocks.tileentity.TileEntityDogDish;
 
 public class BlockDogDish extends BlockContainer { 
+	
+	private Icon[] icons;
 	
 	public BlockDogDish(int id) {
 
@@ -25,7 +29,19 @@ public class BlockDogDish extends BlockContainer {
 		setCreativeTab(CopiousDogs.tabCopiousDogs);
 		setUnlocalizedName("dogDish");
 		setLightOpacity(1);
+		setTickRandomly(true);
 		
+	}
+	
+	@Override
+	public void registerIcons(IconRegister par1IconRegister) {
+		
+		icons = new Icon[16];
+		
+		for (int i = 0; i < icons.length; i++) {
+			
+			icons[i] = par1IconRegister.registerIcon("copiousdogs:" + getTextureFromMetadata(i));
+		}
 	}
 	
 	@Override
@@ -42,7 +58,13 @@ public class BlockDogDish extends BlockContainer {
 	
 	public static String getTextureFromMetadata(int par0) {
 		
-		return "dogDish_" + ItemDye.field_94595_b[getDyeFromBlock(par0)];
+		if (par0 >= 0 && par0 < 16) {
+			return "dogDish_" + ItemDye.field_94595_b[getDyeFromBlock(par0)];
+		}
+		else {
+			
+			return "dogDish_white";
+		}
 	}
 	
 	@Override

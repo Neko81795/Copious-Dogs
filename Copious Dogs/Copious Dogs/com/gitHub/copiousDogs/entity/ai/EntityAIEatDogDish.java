@@ -34,7 +34,7 @@ public class EntityAIEatDogDish extends EntityAIBase {
 							
 							this.dogDish = (TileEntityDogDish) entity;
 							
-							if (dogDish.canEat(dog.getMaxHealth() - dog.func_110143_aJ())) {
+							if (dogDish.canEat(1)) {
 								if (dog.getNavigator().tryMoveToXYZ(dogDish.xCoord, dogDish.yCoord, dogDish.zCoord, .5F)) {
 								
 									dog.getNavigator().setPath(dog.getNavigator().getPathToXYZ(dogDish.xCoord, dogDish.yCoord, dogDish.zCoord), .5);
