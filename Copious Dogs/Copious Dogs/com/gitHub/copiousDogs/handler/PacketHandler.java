@@ -70,14 +70,16 @@ public class PacketHandler implements IPacketHandler {
 		int y = 0;
 		int z = 0;
 		
-		float food = 0;
+		int food = 0;
 		try {
 			
-			x = stream.read();
-			y = stream.read();
-			z = stream.read();
+			x = stream.readInt();
+			y = stream.readInt();
+			z = stream.readInt();
 			
-			food = stream.readFloat();
+			food = stream.readInt();
+			
+			System.out.println(x + "   " + y + "   " + z + "   " + food);
 			
 		} catch (IOException e) {
 

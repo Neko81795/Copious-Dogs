@@ -24,31 +24,31 @@ public class TileEntityDogDish extends TileEntity {
 	 * to eat the exact amount of food they need until they're
 	 * full.
 	 */
-	private float foodLevel = 0;
-	private float prevFoodLevel = 0;
+	private int foodLevel = 0;
+	private int prevFoodLevel = 0;
 	
 	/**
 	 * The maximum amount of food this dog dish can store.
 	 */
-	private float maxFoodLevel = 30;
+	private int maxFoodLevel = 30;
 	
 	public TileEntityDogDish() {
 		
 		foodLevel = 0;
 	}
 	
-	public float getFoodLevel() {
+	public int getFoodLevel() {
 		
 		return foodLevel;
 	}
 	
-	public void setFoodLevel(float par0) {
+	public void setFoodLevel(int par0) {
 		
 		System.out.println(par0);
 		foodLevel = par0;
 	}
 	
-	public float getMaxFoodLevel() {
+	public int getMaxFoodLevel() {
 		
 		return maxFoodLevel;
 	}
@@ -80,9 +80,9 @@ public class TileEntityDogDish extends TileEntity {
 			data.writeInt(yCoord);
 			data.writeInt(zCoord);
 			
-			data.writeFloat(foodLevel);
+			data.writeInt(foodLevel);
 			
-			System.out.println(xCoord + "   " + yCoord + "   " + zCoord);
+			System.out.println(xCoord + "   " + yCoord + "   " + zCoord + "   " + foodLevel);
 			
 		}catch(Exception ex) {
 			
@@ -211,7 +211,7 @@ public class TileEntityDogDish extends TileEntity {
 		
 		super.writeToNBT(par1nbtTagCompound);
 		
-		par1nbtTagCompound.setFloat("FoodLevel", foodLevel);
+		par1nbtTagCompound.setInteger("FoodLevel", foodLevel);
 	}
 	
 	@Override
@@ -219,6 +219,6 @@ public class TileEntityDogDish extends TileEntity {
 		
 		super.readFromNBT(par1nbtTagCompound);
 		
-		foodLevel = par1nbtTagCompound.getFloat("FoodLevel");
+		foodLevel = par1nbtTagCompound.getInteger("FoodLevel");
 	}
 }
