@@ -81,9 +81,7 @@ public class TileEntityDogDish extends TileEntity {
 			data.writeInt(zCoord);
 			
 			data.writeInt(foodLevel);
-			
-			System.out.println(xCoord + "   " + yCoord + "   " + zCoord + "   " + foodLevel);
-			
+						
 		}catch(Exception ex) {
 			
 			ex.printStackTrace();
@@ -119,9 +117,12 @@ public class TileEntityDogDish extends TileEntity {
 		
 		if (side == Side.CLIENT) {
 			
-			System.out.println("Sent!");
-			
 			PacketDispatcher.sendPacketToServer(getDescriptionPacket());
+		}
+		
+		else if (side == Side.SERVER) {
+			
+			PacketDispatcher.sendPacketToAllPlayers(getDescriptionPacket());
 		}
 	}
 	
@@ -137,7 +138,7 @@ public class TileEntityDogDish extends TileEntity {
 		
 		System.out.println(foodLevel + "    " + FMLCommonHandler.instance().getEffectiveSide());
 		
-		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 			
 			if (stack == null) return false;
 				
@@ -180,21 +181,23 @@ public class TileEntityDogDish extends TileEntity {
 	 */
 	public float eat(float amount) {
 		
-		if (foodLevel != 0) {
-			
-			if (foodLevel - amount < 0) {
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
+			if (foodLevel != 0) {
 				
-				foodLevel = 0;
-				System.out.println(foodLevel);
-				sendChange();
-				return foodLevel;
-			}
-			else {
-				
-				foodLevel -= amount;
-				System.out.println(foodLevel);
-				sendChange();
-				return amount;
+				if (foodLevel - amount < 0) {
+					
+					foodLevel = 0;
+					System.out.println(foodLevel);
+					sendChange();
+					return foodLevel;
+				}
+				else {
+					
+					foodLevel -= amount;
+					System.out.println(foodLevel);
+					sendChange();
+					return amount;
+				}
 			}
 		}
 		

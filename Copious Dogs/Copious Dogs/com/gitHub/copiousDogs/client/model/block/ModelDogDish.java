@@ -46,7 +46,7 @@ public class ModelDogDish extends ModelBase {
 	    	FMLClientHandler.instance().getClient().renderEngine.func_110577_a(
 	    			new ResourceLocation("copiousdogs:textures/blocks/food.png"));
 	    	
-	    	float var0 = 0.2f * ((tileEntity.getFoodLevel() - 1) / tileEntity.getMaxFoodLevel());
+	    	float var0 = 0.2f * (((float) tileEntity.getFoodLevel() - 1) / (float) tileEntity.getMaxFoodLevel());
 	    	
 	    	GL11.glTranslatef(0, var0, 0);
 	    	

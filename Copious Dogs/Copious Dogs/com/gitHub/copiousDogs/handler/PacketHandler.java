@@ -41,13 +41,9 @@ public class PacketHandler implements IPacketHandler {
 		
 		DataInputStream stream = new DataInputStream(new ByteArrayInputStream(packet.data));
 		
-		System.out.println("Received!");
-		
 		try {
 			
-			int id = stream.read();
-			
-			System.out.println(id);
+			int id = stream.readInt();
 			
 			switch(id) {
 			
@@ -64,8 +60,6 @@ public class PacketHandler implements IPacketHandler {
 	
 	private void handleTileEntityPacket(Packet250CustomPayload packet, Player player, DataInputStream stream) {
 		
-		System.out.println("received!");
-		
 		int x = 0;
 		int y = 0;
 		int z = 0;
@@ -79,15 +73,11 @@ public class PacketHandler implements IPacketHandler {
 			
 			food = stream.readInt();
 			
-			System.out.println(x + "   " + y + "   " + z + "   " + food);
-			
 		} catch (IOException e) {
 
 			
 			e.printStackTrace();
 		}
-		
-		System.out.println(food);
 		
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
 			
@@ -103,6 +93,7 @@ public class PacketHandler implements IPacketHandler {
 					
 					dish.setFoodLevel(food);
 					dish.onInventoryChanged();
+					world.markBlockForRenderUpdate(x, y, z);
 				}
 			}
 		}
