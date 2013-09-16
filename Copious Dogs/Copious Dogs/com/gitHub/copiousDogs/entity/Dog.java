@@ -339,18 +339,6 @@ public class Dog extends EntityTameable
 	            this.func_110196_bT();
 	            return true;
 	        }
-			
-			if (stack == null) {
-				if (isSitting()) {
-					this.setSitting(false);
-					return true;
-				}
-				else {
-			
-					setSitting(true);
-					return true;
-				}
-			}
 		}
 		
 		return false;

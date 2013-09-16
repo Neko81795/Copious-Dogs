@@ -10,7 +10,7 @@ public class Reference
 	public static final String CHANNEL_NAME = "CopiousDogs#1";
 	
 	//Other settings
-	public static boolean DEBUG = true;
+	public static boolean DEBUG = false;
 	
 	//Item IDs
 	public static int DOG_BISCUIT_ID;
