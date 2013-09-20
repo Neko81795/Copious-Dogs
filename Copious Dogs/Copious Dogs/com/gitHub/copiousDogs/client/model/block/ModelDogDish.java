@@ -35,7 +35,7 @@ public class ModelDogDish extends ModelBase {
 
 	    GL11.glScalef(0.75f, 0.75f, 0.75f);
 	    
-	    FMLClientHandler.instance().getClient().renderEngine.func_110577_a(
+	    FMLClientHandler.instance().getClient().renderEngine.bindTexture(
 	    		new ResourceLocation("copiousdogs:textures/blocks/" + 
 	    				BlockDogDish.getTextureFromMetadata(tileEntity.blockMetadata) + ".png"));
 
@@ -43,7 +43,7 @@ public class ModelDogDish extends ModelBase {
 
 	    if (tileEntity.getFoodLevel() > 0) {
 	    	
-	    	FMLClientHandler.instance().getClient().renderEngine.func_110577_a(
+	    	FMLClientHandler.instance().getClient().renderEngine.bindTexture(
 	    			new ResourceLocation("copiousdogs:textures/blocks/food.png"));
 	    	
 	    	float var0 = 0.2f * (((float) tileEntity.getFoodLevel() - 1) / (float) tileEntity.getMaxFoodLevel());

@@ -37,7 +37,7 @@ public class RenderDog extends RenderLiving {
         float f1;
         if (par2 == 1 && par1Dog.isTamed() && par1Dog.hasCollar())
         {
-            this.func_110776_a(collarTexture);
+            this.bindTexture(collarTexture);
             f1 = 1.0F;
             int j = DogCollar.getItemFromDye(par1Dog.getCollarColor());      
             GL11.glColor3f(f1 * EntitySheep.fleeceColorTable[j][0], f1 * EntitySheep.fleeceColorTable[j][1], f1 * EntitySheep.fleeceColorTable[j][2]);
@@ -174,7 +174,7 @@ public class RenderDog extends RenderLiving {
         		if (dog.isTamed())renderTag("Owner:" + dog.getOwnerName(), par1EntityLivingBase, par2, par4, par6, 1F);
         		renderTag("Is in love:" + dog.isInLove(), par1EntityLivingBase, par2, par4, par6, 1.25F);
         		renderTag("In love:" + dog.inLove, par1EntityLivingBase, par2, par4, par6, 1.5F);
-        		renderTag(dog.func_110143_aJ() + "/" + dog.getMaxHealth(), par1EntityLivingBase, par2, par4, par6, -.25F);
+        		renderTag(dog.getHealth() + "/" + dog.getMaxHealth(), par1EntityLivingBase, par2, par4, par6, -.25F);
         	}
         }
 	}
@@ -240,9 +240,9 @@ public class RenderDog extends RenderLiving {
     {
         return this.func_82447_a((Dog)par1EntityLivingBase, par2, par3);
     }
-	
+
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		
 		return texture;
 	}

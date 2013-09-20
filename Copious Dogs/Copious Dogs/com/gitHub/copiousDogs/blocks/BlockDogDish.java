@@ -59,7 +59,7 @@ public class BlockDogDish extends BlockContainer {
 	public static String getTextureFromMetadata(int par0) {
 		
 		if (par0 >= 0 && par0 < 16) {
-			return "dogDish_" + ItemDye.field_94595_b[getDyeFromBlock(par0)];
+			return "dogDish_" + ItemDye.dyeItemNames[getDyeFromBlock(par0)];
 		}
 		else {
 			

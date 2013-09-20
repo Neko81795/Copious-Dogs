@@ -20,6 +20,7 @@ public class DogBiscuit extends ItemCopiousDogs
 		return 3;
 	}
 	
+	/*
 	@Override
 	public boolean func_111207_a(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
@@ -48,5 +49,5 @@ public class DogBiscuit extends ItemCopiousDogs
 		}
 		
 		return false;
-	}
+	}*/
 }

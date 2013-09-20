@@ -20,6 +20,7 @@ public class DogCollar extends ItemColored {
 		setMaxStackSize(1);
 	}
 	
+	/*
 	@Override
 	public boolean func_111207_a(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
@@ -62,5 +63,5 @@ public class DogCollar extends ItemColored {
 		}
 		
 		return false;
-	}
+	}*/
 }

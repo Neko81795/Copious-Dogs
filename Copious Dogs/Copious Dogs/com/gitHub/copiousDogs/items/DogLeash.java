@@ -13,9 +13,10 @@ public class DogLeash extends ItemCopiousDogs {
 		
 		super(id);
 		setUnlocalizedName("dogLeash");
-		func_111206_d("dog_leash");
+		setTextureName("dog_leash");
 	}
 	
+	/*
 	@Override
 	public boolean func_111207_a(ItemStack par1ItemStack,
 			EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
@@ -43,4 +44,5 @@ public class DogLeash extends ItemCopiousDogs {
 			
 		return false;
 	}
+	*/
 }

@@ -157,11 +157,6 @@ public class Dog extends EntityTameable
 		}
 	}
 	
-	public float getMaxHealth() {
-		
-		return 15;
-	}
-	
 	public byte getCollarColor() {
 		
 		return this.dataWatcher.getWatchableObjectByte(21);
@@ -211,7 +206,7 @@ public class Dog extends EntityTameable
 	@Override
 	protected void updateAITick() {
 		
-		this.dataWatcher.updateObject(19, new Float(this.func_110143_aJ()));
+		this.dataWatcher.updateObject(19, new Float(this.getHealth()));
 		
 		
 	}
@@ -221,7 +216,7 @@ public class Dog extends EntityTameable
 		
 		super.entityInit();
 		this.dataWatcher.addObject(18, (byte)0);
-		this.dataWatcher.addObject(19, new Float(this.func_110143_aJ()));
+		this.dataWatcher.addObject(19, new Float(this.getHealth()));
 		this.dataWatcher.addObject(20, (byte)0);
 		this.dataWatcher.addObject(21, (byte)-1);
 	}
@@ -229,6 +224,7 @@ public class Dog extends EntityTameable
 	public Dog(World world, float moveSpeed, String breed) {
 		
 		super(world);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(15);
 		this.moveSpeed = moveSpeed;
 		this.breed = breed;
 		
@@ -245,7 +241,7 @@ public class Dog extends EntityTameable
     	this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 0F));
     	this.tasks.addTask(9, new EntityAILookIdle(this));
     	
-    	this.setEntityHealth(getMaxHealth());
+    	
 	}
 	
 	@Override
@@ -271,15 +267,6 @@ public class Dog extends EntityTameable
 	public void setTamed(boolean par1)
 	{
 		super.setTamed(par1);
-
-		if (par1)
-		{
-			this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(20.0D);
-    	}
-		else
-		{	
-			this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(8.0D);
-		}
 		
 		setTailAnimated(true);
 	}
@@ -339,6 +326,81 @@ public class Dog extends EntityTameable
 	            this.func_110196_bT();
 	            return true;
 	        }
+			
+			if (stack.itemID == CopiousDogs.dogBiscuit.itemID) {
+				
+				if (!isTamed()) {
+					
+					par1EntityPlayer.swingItem();
+					
+					if (!par1EntityPlayer.capabilities.isCreativeMode) 
+					{
+						setTameValue((byte)(getTameValue() + + 3 + getRNG().nextInt(8)));
+							
+						tryToTame(par1EntityPlayer);
+						stack.stackSize--;
+					}
+					else
+						setTameValue((byte)11);
+						tryToTame(par1EntityPlayer);
+							
+					return true;
+				}
+			}
+			
+			if (stack.itemID == CopiousDogs.dogCollar.itemID) {
+				
+				if (isTamed() && getOwnerName().equalsIgnoreCase(par1EntityPlayer.getEntityName())) {
+									
+					par1EntityPlayer.swingItem();
+					
+					byte color = getCollarColor();
+					
+					if (!hasCollar()) {
+						setHasCollar(true);
+					}
+					setCollarColor((byte) DogCollar.getDyeFromItem(stack.getItemDamage()));
+					
+					if (!par1EntityPlayer.capabilities.isCreativeMode) {
+						
+						stack.stackSize--;
+						
+						if (color > -1) {
+
+							Random rand = getRNG();
+								
+							ItemStack collar = new ItemStack(CopiousDogs.dogCollar.itemID, 1, DogCollar.getItemFromDye(color));
+							EntityItem item = entityDropItem(collar, 1F);
+							item.motionY += rand.nextFloat() * .5F;
+							item.motionX += (rand.nextFloat() - rand.nextFloat()) * .1F;
+							item.motionZ += (rand.nextFloat() - rand.nextFloat()) * .1F;
+							
+							par1EntityPlayer.worldObj.spawnEntityInWorld(item);
+						}
+					}
+					
+					return true;
+				}
+			}
+			
+			if (stack.itemID == CopiousDogs.dogLeash.itemID) {
+				
+				if (hasCollar() && getOwnerName().equalsIgnoreCase(par1EntityPlayer.getEntityName())) {
+					
+					par1EntityPlayer.swingItem();
+					
+					if (!isLeashed()) {
+						
+						setLeashed(true);
+					}
+					else {
+						
+						setLeashed(false);
+					}
+					
+					return true;
+				}
+			}
 		}
 		
 		return false;

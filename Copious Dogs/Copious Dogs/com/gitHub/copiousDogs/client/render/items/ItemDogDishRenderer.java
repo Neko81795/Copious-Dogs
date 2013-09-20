@@ -68,7 +68,7 @@ public class ItemDogDishRenderer implements IItemRenderer {
 	    GL11.glScalef(scale, scale, scale);
 	    GL11.glRotatef(180f, 0f, 1f, 0f);
 	     
-	    FMLClientHandler.instance().getClient().renderEngine.func_110577_a(new ResourceLocation("copiousdogs:textures/blocks/" + BlockDogDish.getTextureFromMetadata(meta) + ".png"));
+	    FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation("copiousdogs:textures/blocks/" + BlockDogDish.getTextureFromMetadata(meta) + ".png"));
 	     
 	    model.render();
 	     

@@ -29,7 +29,7 @@ public class ItemColored extends ItemCopiousDogs {
 		
 		for (int i = 0; i < 16; i++) {
 			
-			itemIcons[i] = par1IconRegister.registerIcon("copiousdogs:" + getUnlocalizedName().substring(5) + "_" + ItemDye.field_94595_b[getItemFromDye(i)]);
+			itemIcons[i] = par1IconRegister.registerIcon("copiousdogs:" + getUnlocalizedName().substring(5) + "_" + ItemDye.dyeItemNames[getItemFromDye(i)]);
 		}
 	}
 	

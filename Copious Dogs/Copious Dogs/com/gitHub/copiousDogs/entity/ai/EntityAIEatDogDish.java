@@ -22,7 +22,7 @@ public class EntityAIEatDogDish extends EntityAIBase {
 	@Override
 	public boolean shouldExecute() {
 		
-		if (dog.func_110143_aJ() < dog.getMaxHealth() && !dog.isSitting() && !dog.isEating()) {
+		if (dog.getHealth() < dog.getMaxHealth() && !dog.isSitting() && !dog.isEating()) {
 			
 			for (int x = 0; x < radius * 2; x++) {
 				for (int y = 0; y < radius * 2; y++) {
@@ -58,7 +58,7 @@ public class EntityAIEatDogDish extends EntityAIBase {
 	public boolean continueExecuting() {
 		
 		
-		return dog.func_110143_aJ() < dog.getMaxHealth() && !dog.isDead && eatingTimeLeft > 0 &&
+		return dog.getHealth() < dog.getMaxHealth() && !dog.isDead && eatingTimeLeft > 0 &&
 				dog.worldObj.getBlockTileEntity(dogDish.xCoord, dogDish.yCoord, dogDish.zCoord) instanceof TileEntityDogDish;
 	}
 	
@@ -74,7 +74,7 @@ public class EntityAIEatDogDish extends EntityAIBase {
 			
 			if (eatingTimeLeft == 0) {
 				
-				dog.heal(dogDish.eat(dog.getMaxHealth() - dog.func_110143_aJ()));
+				dog.heal(dogDish.eat(dog.getMaxHealth() - dog.getHealth()));
 				dog.setEating(false);
 			}
 		}
